@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <!-- form to add specific filters -->
+      <div class="row">
+        <div class="col-xs-12">
+          <%= form_tag('/index', method: 'get') do %>
+            <%= label_tag(:style, "Style:") %>
+            <%= text_field_tag(:style) %>
+            <%= label_tag(:price, "Price:") %>
+            <%= text_field_tag(:price) %>
+            <%= label_tag(:area, "Area:") %>
+            <%= text_field_tag(:area) %>
+            <%= label_tag(:view, "Exceptional view:") %>
+            <%= check_box_tag(:view) %>
+            <%= label_tag(:furniture, "Modular furniture:") %>
+            <%= check_box_tag(:furniture) %>
+            <%= label_tag(:exposition, "Exposition:") %>
+            <%= text_field_tag(:exposition) %>
+
+            <%= submit_tag("Search") %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- show all spots according to filters -->
+      <% @spots.each do |spot| %>
+        <% if spot.visible = true %>
+          <div class="col-md-6">
+            <div class="card">
+              <p><%= spot.title %></p>
+              <p><%= spot.price.to_s + ' €/day' %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-5">
+      <!-- map -->
+      <div id="map"></div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+<script type="text/javascript">
+var myLatlng = new google.maps.LatLng(48.852937,2.364178);
+
+var myOptions = {
+  zoom: 16,
+  center: myLatlng,
+  scrollwheel: false,
+  mapTypeId: google.maps.MapTypeId.ROADMAP,
+  styles: [
+    {
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "hue": "#FFBB00"
+            },
+            {
+                "saturation": 43.400000000000006
+            },
+            {
+                "lightness": 37.599999999999994
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "stylers": [
+            {
+                "hue": "#FFC200"
+            },
+            {
+                "saturation": -61.8
+            },
+            {
+                "lightness": 45.599999999999994
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "hue": "#FF0300"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 51.19999999999999
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "hue": "#FF0300"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 52
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "hue": "#0078FF"
+            },
+            {
+                "saturation": -13.200000000000003
+            },
+            {
+                "lightness": 2.4000000000000057
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "hue": "#00FF6A"
+            },
+            {
+                "saturation": -1.0989010989011234
+            },
+            {
+                "lightness": 11.200000000000017
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    }
+]
+};
+
+var map = new google.maps.Map(document.getElementById('map'), myOptions);
+var marker = new google.maps.Marker({
+  position: myLatlng,
+  map: map,
+  title: "You are here!"
+});
+</script>
