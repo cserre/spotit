@@ -1,0 +1,37 @@
+<div class="container">
+<!-- displaying the title in upper CASE -->
+  <div class="row">
+    <div class="col-xs-12"><h1 class="text-uppercase"><%= @spot.title %></h1> </div>
+  </div>
+
+<!-- displaying the address -->
+  <div class="row">
+    <div class="col-xs-12">
+      <address>
+        <strong><%= @spot.city %></strong>, <%= @spot.address %>, <%= @spot.post_code %><br>
+      </address>
+    </div>
+  </div>
+
+<!-- displaying all the features of the spot -->
+  <div class="row">
+    <div class="col-xs-12 col-md-2.4">Style : <strong><%= @spot.style %></strong></div>
+    <div class="col-xs-12 col-md-2.4">m2 : <strong><%= @spot.area %></strong></div>
+    <div class="col-xs-12 col-md-2.4">Exposition : <strong><%= @spot.exposition %></strong></div>
+    <div class="col-xs-12 col-md-2.4">Exceptional view : <strong><%= @spot.exceptional_view %></strong></div>
+    <div class="col-xs-12 col-md-2.4">Modular furniture : <strong><%= @spot.modular_furniture %></strong></div>
+  </div>
+
+<!-- displaying the description -->
+  <div class="row">
+    <div class="col-xs-12"><p> <strong>En savoir plus sur le bien : </strong><%= @spot.description %></p></div>
+    <div class="col-xs-12"><p><%= @spot.price %> € / demi-journée</p></div>
+  </div>
+
+</div>
+
+
+
+
+
+
