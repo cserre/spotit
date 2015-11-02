@@ -1,2 +1,14 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="center">
+
+  <%= simple_form_for (@spot), :html => { :class => 'form-inline' } do |f| %>
+    <%= f.error_notification %>
+
+    <%= f.input_field :city, :placeholder => "City", class: 'form-control' %>
+    <%= f.input_field :style, :placeholder => "Style", class: 'form-control' %>
+    <%= f.input_field :area, :placeholder => "Area", class: 'form-control' %>
+
+    <%= f.submit "Find a spot" %>
+  <% end %>
+
+</div>
