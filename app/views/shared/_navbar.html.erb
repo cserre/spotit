@@ -7,7 +7,10 @@
 
     <div class="navbar-wagon-pusher"></div>
 
-    <!-- <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
+<!--     SUPPRIMÉ POUR REPRODUIRE A L'IDENTIQUE LA NAVABAR DE AIRBNB
+ -->
+
+ <!-- <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
       <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
       <button type="submit" class="navbar-wagon-search-btn">
         <i class="fa fa-search"></i>
@@ -45,9 +48,9 @@
         </div>
       </div>
     <% else %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to t(".sign_in", default: "Login / Sign up"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
     <hr>
-    <%= link_to t(".top_call_to_action", default: "Add a New Spot"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <%= link_to t(".top_call_to_action", default: "Add a New Spot"), new_spot_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 </nav>
