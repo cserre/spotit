@@ -50,7 +50,20 @@
   }
 }
 .card-detail {
+  background-color: white;
   font-size: 14px;
-  height: 70px;
+  height: 30px;
   margin : 5px;
+}
+
+.card-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  h2 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 13px;
+  }
 }

@@ -54,12 +54,15 @@
                <%= @allspot.first.price.to_i.to_s + ' €/day' %>
              </span>
              <%= link_to "", spot_path(@allspot.first),class: 'card-link' %>
-           </div>
-           <div class="card-detail">
-             <div class="title"><%= @allspot.first.title %></div>
+             <div class="card-text">
+              <%= @allspot.first.title %>
+             </div>
            </div>
           </div>
         <% end %>
+      </div>
+
+
       </div>
     </div>
   </div>
