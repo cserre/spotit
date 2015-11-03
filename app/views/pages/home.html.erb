@@ -1,17 +1,19 @@
 
-<div class="center">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8 col-sm-10 col-xs-offset-2">
-          <%= simple_form_for (@spot), :html => { :class => 'form-inline' } do |f| %>
-            <%= f.error_notification %>
+<div class="background">
+  <div class="form">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8 col-sm-10 col-xs-offset-2">
+            <%= simple_form_for (@spot), :html => { :class => 'form-inline' } do |f| %>
+              <%= f.error_notification %>
 
-            <%= f.input_field :city, :placeholder => "City", class: 'form-control' %>
-            <%= f.input_field :style, :placeholder => "Style", class: 'form-control' %>
-            <%= f.input_field :area, :placeholder => "Area", class: 'form-control' %>
+              <%= f.input_field :city, :placeholder => "City", class: 'form-control' %>
+              <%= f.input_field :style, :placeholder => "Style", class: 'form-control' %>
+              <%= f.input_field :area, :placeholder => "Area", class: 'form-control' %>
 
-            <%= f.submit "Find a spot" %>
-          <% end %>
+              <%= f.submit "Find a spot" %>
+            <% end %>
+        </div>
       </div>
     </div>
   </div>
