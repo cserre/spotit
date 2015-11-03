@@ -25,14 +25,13 @@
   </div>
 </div> -->
 
-
-
 <div class="background">
-  <div class="form">
+  <div class="title-home">
     <div class="container">
       <div class="row">
-        <div class=" col-xs-8 col-sm-10 col-xs-offset-2">
-          <div class="form-group">
+        <div class=" col-xs-8 col-sm-10 col-xs-offset-2 text-center">
+          <h1 class="title-white">BIENVENUE DANS VOTRE STUDIO</h1>
+          <div class="form-group pt-xs">
               <%= form_tag('/spots', method: 'get', :class => "form-inline") do %>
 
                  <%= text_field_tag :city, nil, placeholder: "City", class: 'form-control' %>
