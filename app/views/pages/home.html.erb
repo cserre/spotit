@@ -1,35 +1,9 @@
-<!--  PREVIOUS PAUL-EMMANUEL'S FORMULAIRE
-
-<div class="background">
-  <div class="form">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-8 col-sm-10 col-xs-offset-2">
-
-
-            <%= simple_form_for (@spot), :html => { :class => 'form-inline' } do |f| %>
-              <%= f.error_notification %>
-
-              <%= f.input_field :city, :placeholder => "City", class: 'form-control' %>
-              <%= f.input_field :style, :placeholder => "Style", class: 'form-control' %>
-              <%= f.input_field :area, :placeholder => "Area", class: 'form-control' %>
-
-              <%= f.submit "Find a spot" %>
-
-
-
-            <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <div class="background">
   <div class="title-home">
     <div class="container">
       <div class="row">
-        <div class=" col-xs-8 col-sm-10 col-xs-offset-2 text-center">
+        <div class=" col-xs-8 col-sm-10 col-xs-offset-1 text-center">
           <h1 class="title-white">BIENVENUE DANS VOTRE STUDIO</h1>
           <div class="form-group pt-xs">
               <%= form_tag('/spots', method: 'get', :class => "form-inline") do %>
@@ -54,12 +28,12 @@
              <span class="card-bg" style="background-image: url(<%= image_path 'http://kevinfluchaire.com/wp-content/uploads/2012/06/MakingOF_CLIPKevin_175.jpg' %>)"></span>
              <span class="card-gradient"></span>
              <span class="card-price">
-               <%= @allspot.first.price.to_i.to_s + ' €/day' %>
+               <%= @spots.first.price.to_i.to_s + ' €/day' %>
              </span>
-             <%= link_to "", spot_path(@allspot.first),class: 'card-link' %>
+             <%= link_to "", spot_path(@spots.first),class: 'card-link' %>
              </div>
              <div class="card-detail">
-               <div><%= @allspot.first.title %></div>
+               <div><%= @spots.first.title %></div>
              </div>
            </div>
           </div>
