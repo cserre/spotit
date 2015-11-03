@@ -1,22 +1,25 @@
 <% prices = [] %>
 <% areas = [] %>
+<% selected_spots = [] %>
 <% @spots.each do |spot| %>
   <% if spot.visible && (@params["city"].nil? ? true : spot.city == @params["city"]) %>
     <% prices << spot.price %>
     <% areas << spot.area %>
+    <% selected_spots << spot %>
   <% end %>
 <% end %>
+<% selected_spots %>
 <% max_price = prices.sort.last.to_i %>
 <% min_price = prices.sort.first.to_i %>
 <% max_area = areas.sort.last.to_i %>
 <% min_area = areas.sort.first.to_i %>
-
+<% @params["price"].to_i %>
 
 <div class="sidebar sidebar-padded">
   <!-- form to add specific filters and refresh this page -->
   <div class="row">
     <div class="col-xs-12">
-      <%= form_tag('/spots', method: 'get') do %>
+      <%= form_tag(spots_path, method: 'get') do %>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -56,7 +59,7 @@
   <!-- show all spots according to filters -->
   <div class="row">
     <% @spots.each do |spot| %>
-      <% if spot.visible && (@params["price"].nil? ? true : spot.price <= @params["price"].to_i)  && (@params["city"].nil? ? true : spot.city == @params["city"]) && (@params["style"].nil? ? true : spot.style == @params["style"] && (@params["area"].nil? ? true : spot.area >= @params["area"].to_i) && (@params["exceptional_view"].nil? ? true : spot.exceptional_view == true) && (@params["modular_furniture"].nil? ? true : spot.modular_furniture == true) && (@params["exposition"].nil? ? true : @params["exposition"].any? { |expo| expo == spot.exposition}))
+      <% if spot.visible && (@params["price"].nil? ? true : spot.price <= @params["price"].to_i)  && ((@params["city"].nil? || @params["city"] == "") ? true : spot.city == @params["city"]) && ((@params["style"].nil? || @params["style"] == "") ? true : spot.style == @params["style"] && ((@params["area"].nil? || @params["area"] == "") ? true : spot.area >= @params["area"].to_i) && (@params["exceptional_view"].nil? ? true : spot.exceptional_view == true) && (@params["modular_furniture"].nil? ? true : spot.modular_furniture == true) && (@params["exposition"].nil? ? true : @params["exposition"].any? { |expo| expo == spot.exposition}))
           %>
         <div class="col-md-6">
         <div class="card">
@@ -79,25 +82,6 @@
       <% end %>
     <% end %>
   </div>
-  <nav>
-  <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
 </div>
 <!-- block for map -->
 
@@ -212,11 +196,14 @@
   <%= javascript_tag do %>
     var sliderPrice = $('.slider-price').slider();
     var sliderArea = $('.slider-area').slider();
-    var valuePrice = <%= @params["price"].to_i %>;
-    var valueArea = <%= @params["area"].to_i %>;
-    console.log(valuePrice);
-    sliderPrice.slider('setValue', valuePrice);
-    sliderArea.slider('setValue', valueArea);
+    <% if @params["price"].to_i > 0 %>
+      var valuePrice = <%= @params["price"].to_i %>;
+      sliderPrice.slider('setValue', valuePrice);
+    <% end %>
+    <% if @params["area"].to_i > 0 %>
+      var valueArea = <%= @params["area"].to_i %>;
+      sliderArea.slider('setValue', valueArea);
+    <% end %>
   <% end %>
 <% end %>
 

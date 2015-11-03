@@ -5,7 +5,6 @@ class SpotsController < ApplicationController
 
   def index
     @spots = Spot.all
-    @spot = Spot.new
   end
 
   def show
