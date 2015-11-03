@@ -44,8 +44,12 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <% 3.times do %>
+    </div>
+  </div>
+</div>
+
+<div>
+        <% 6.times do %>
           <div class="col-xs-12 col-sm-4">
             <div class="card">
              <span class="card-bg" style="background-image: url(<%= image_path 'http://kevinfluchaire.com/wp-content/uploads/2012/06/MakingOF_CLIPKevin_175.jpg' %>)"></span>
@@ -54,16 +58,12 @@
                <%= @allspot.first.price.to_i.to_s + ' €/day' %>
              </span>
              <%= link_to "", spot_path(@allspot.first),class: 'card-link' %>
-             <div class="card-text">
-              <%= @allspot.first.title %>
+             </div>
+             <div class="card-detail">
+               <div><%= @allspot.first.title %></div>
              </div>
            </div>
           </div>
         <% end %>
-      </div>
-    </div>
-  </div>
 </div>
-
-
 
