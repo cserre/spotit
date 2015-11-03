@@ -1,0 +1,224 @@
+<% prices = [] %>
+<% areas = [] %>
+<% @spots.each do |spot| %>
+  <% if spot.visible && (@params["city"].nil? ? true : spot.city == @params["city"]) %>
+    <% prices << spot.price %>
+    <% areas << spot.area %>
+  <% end %>
+<% end %>
+<% max_price = prices.sort.last.to_i %>
+<% min_price = prices.sort.first.to_i %>
+<% max_area = areas.sort.last.to_i %>
+<% min_area = areas.sort.first.to_i %>
+
+
+<div class="sidebar sidebar-padded">
+  <!-- form to add specific filters and refresh this page -->
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_tag('/spots', method: 'get') do %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= label_tag :price, "Price:" %>
+              <%= text_field_tag :price, nil, class: 'slider-price span2', data: { :"slider-id" => 'slider-price', :"slider-min" => min_price, :"slider-max" => max_price, :"slider-step" => 100, :"slider-value" => max_price } %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :area, "Area:" %>
+              <%= text_field_tag :area, nil, class: 'slider-area span2', data: { :"slider-id" => 'slider-area', :"slider-min" => min_area, :"slider-max" => max_area, :"slider-step" => 1, :"slider-value" => min_area, :"slider-selection" => "after"} %>
+            </div>
+            <div class="form-group form-inline">
+              <%= label_tag :city, "City:" %>
+              <%= text_field_tag :city, @params["city"], class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= label_tag :exceptional_view, "Exceptional view:" %>
+              <%= check_box_tag :exceptional_view, nil, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :modular_furniture, "Modular furniture:" %>
+              <%= check_box_tag :modular_furniture, nil, class: 'form-control' %>
+            </div>
+            <!-- <div class="form-group">
+              <%= label_tag :exposition, "Exposition:" %>
+              <%= select_tag :exposition, options_for_select(['N', 'S', 'E', 'O']), multiple: true %>
+            </div> -->
+            <%= submit_tag "Find", class: 'btn btn-primary' %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+
+  <!-- show all spots according to filters -->
+  <div class="row">
+    <% @spots.each do |spot| %>
+      <% if spot.visible && (@params["price"].nil? ? true : spot.price <= @params["price"].to_i)  && (@params["city"].nil? ? true : spot.city == @params["city"]) && (@params["style"].nil? ? true : spot.style == @params["style"] && (@params["area"].nil? ? true : spot.area >= @params["area"].to_i) && (@params["exceptional_view"].nil? ? true : spot.exceptional_view == true) && (@params["modular_furniture"].nil? ? true : spot.modular_furniture == true) && (@params["exposition"].nil? ? true : @params["exposition"].any? { |expo| expo == spot.exposition}))
+          %>
+        <div class="col-md-6">
+        <div class="card">
+          <span class="card-bg" style="background-image: url(<%= image_path 'loft1.png' %>)"></span>
+          <span class="card-gradient"></span>
+          <!-- <span class="card-rating">
+
+            <%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * 4).html_safe %>
+          </span> -->
+          <span class="card-price">
+            <%= spot.price.to_i.to_s + ' €/day' %>
+          </span>
+          <%= link_to "", spot_path(spot),class: 'card-link' %>
+        </div>
+        <div class="card-detail">
+          <div class="title"><%= spot.title %></div>
+        </div>
+
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  <nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+<!-- block for map -->
+
+<div id="map">MAP</div>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+<script type="text/javascript">
+  var myLatlng = new google.maps.LatLng(48.852937,2.364178);
+  // var myLatlng2 = new google.maps.LatLng(48.852,2.364178);
+  var myOptions = {
+    zoom: 16,
+    center: myLatlng,
+    scrollwheel: false,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [
+  {
+      "featureType": "administrative",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#444444"
+          }
+      ]
+  },
+  {
+      "featureType": "landscape",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#f2f2f2"
+          }
+      ]
+  },
+  {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "all",
+      "stylers": [
+          {
+              "saturation": -100
+          },
+          {
+              "lightness": 45
+          }
+      ]
+  },
+  {
+      "featureType": "road.highway",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "simplified"
+          }
+      ]
+  },
+  {
+      "featureType": "road.arterial",
+      "elementType": "labels.icon",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "transit",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#2c3e50"
+          },
+          {
+              "visibility": "on"
+          }
+      ]
+  }
+  ]
+  };
+  var map = new google.maps.Map(document.getElementById('map'), myOptions);
+  var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    title: "You are here!"
+  });
+  // var marker = new google.maps.Marker({
+  //   position: myLatlng2,
+  //   map: map,
+  //   title: "You are here!"
+  // });
+</script>
+
+<%= content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    var sliderPrice = $('.slider-price').slider();
+    var sliderArea = $('.slider-area').slider();
+    var valuePrice = <%= @params["price"].to_i %>;
+    var valueArea = <%= @params["area"].to_i %>;
+    console.log(valuePrice);
+    sliderPrice.slider('setValue', valuePrice);
+    sliderArea.slider('setValue', valueArea);
+  <% end %>
+<% end %>
+
+
+
