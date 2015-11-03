@@ -1,0 +1,56 @@
+.card {
+  position: relative;
+  height: 175px;
+  // text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  color: white;
+  margin: 20px auto;
+}
+.card-bg{
+  background-size: cover;
+  // border-radius: 0px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.card-gradient {
+  background-image: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 80%);
+  // border-radius: 3px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.card-price {
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+  background-color: white;
+  color: rgb(80,80,80);
+  padding: 10px 10px;
+  margin: 0px 0px;
+  font-size: 14px;
+  z-index: 3;
+}
+.card-rating {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index:2;
+  background: black;
+  opacity: 0;
+  &:hover{
+    opacity: 0.1;
+  }
+}
+.card-detail {
+  font-size: 14px;
+  height: 70px;
+  margin : 5px;
+}
