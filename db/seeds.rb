@@ -44,3 +44,7 @@ Spot.create(title: 'Crazy appartment with big terrace, jaccuzi and view on Eiffe
   address: '12 rue de Paris', city: 'Paris', description: "x", price: "900", visible: true,
   style: "industriel", post_code: 94300, area: 200, exposition:"SE", exceptional_view: true,
   modular_furniture: true, user_id: 4)
+
+
+
+
