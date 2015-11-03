@@ -4,3 +4,4 @@
 //= require slick.js/slick.js
 //= require lightbox
 //= require_tree .
+//= require bootstrap-slider

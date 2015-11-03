@@ -1,4 +1,13 @@
 @import "alert";
 @import "avatars";
 @import "badges";
+@import "card";
+@import "map";
+@import "sidebar";
+@import "slider";
 @import "banner";
+
+.body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
