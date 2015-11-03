@@ -28,13 +28,6 @@ class SpotsController < ApplicationController
     @spot = Spot.find(id)
   end
   def set_params
-    @city = params[:city]
-    @style = params[:style]
-    @price = params[:price]
-    @area = params[:area]
-    @exceptional_view = params[:exceptional_view]
-    @modular_furniture = params[:modular_furniture]
-    @exposition = params[:exposition]
     @params = params
   end
   def spot_params

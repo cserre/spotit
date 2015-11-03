@@ -1,8 +1,24 @@
 #map {
-  // position: fixed;
+  // position: absolute;
+  // margin-top: 70px;
   // top: 0px;
   // bottom: 0px;
-  heigth: 200px;
-  width: 100%;
-  background-color: blue;
+  // // right: 0px;
+  // height: 100%;
+  // width: 100%;
+  // background-color: blue;
+  // border: 3px solid red;
+  position: absolute;
+  width: 40%;
+  top: 70px;
+  right: 0px;
+  bottom: 0px;
+}
+.sidebar {
+  position: absolute;
+  top: 70px; /* assuming a navbar with a 50px height */
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  overflow: auto; /* permet de rendre le contenu scrollable */
 }

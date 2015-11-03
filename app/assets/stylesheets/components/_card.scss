@@ -24,12 +24,14 @@
 }
 .card-price {
   position: absolute;
-  bottom: 15px;
-  left: 0px;
-  background-color: rgb(40, 40, 40);
+  bottom: 0px;
+  right: 10px;
+  background-color: white;
+  color: rgb(80,80,80);
   padding: 10px 10px;
   margin: 0px 0px;
   font-size: 14px;
+  z-index: 3;
 }
 .card-rating {
   position: absolute;

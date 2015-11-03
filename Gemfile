@@ -28,3 +28,6 @@ group :production do
   gem 'rails_12factor'
   gem 'puma'
 end
+
+# Gem pour le slider de prix
+gem 'bootstrap-slider-rails'
