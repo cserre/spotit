@@ -7,4 +7,5 @@ class Spot < ActiveRecord::Base
   validates :price, presence: true
   validates :address, presence: true
 
+  paginates_per 20
 end

@@ -38,3 +38,6 @@ end
 
 # Gem pour le slider de prix
 gem 'bootstrap-slider-rails'
+
+# Gem pour la pagination
+gem 'kaminari'

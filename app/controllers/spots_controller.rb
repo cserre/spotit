@@ -4,7 +4,8 @@ class SpotsController < ApplicationController
   before_action :set_params, only: [:index]
 
   def index
-    @spots = Spot.all
+    # @spots = Spot.all
+    @spots = Spot.page params[:page]
   end
 
   def show

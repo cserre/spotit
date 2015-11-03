@@ -2,7 +2,7 @@
 <% areas = [] %>
 <% selected_spots = [] %>
 <% @spots.each do |spot| %>
-  <% if spot.visible && (@params["city"].nil? ? true : spot.city == @params["city"]) %>
+  <% if spot.visible && ((@params["city"].nil? || @params["city"] == "") ? true : spot.city == @params["city"]) %>
     <% prices << spot.price %>
     <% areas << spot.area %>
     <% selected_spots << spot %>
@@ -81,6 +81,7 @@
       </div>
       <% end %>
     <% end %>
+    <%= paginate @spots %>
   </div>
 </div>
 <!-- block for map -->
