@@ -1,4 +1,5 @@
 class SpotsController < ApplicationController
+
   before_action :set_spot, only: [:show, :edit]
   before_action :set_params, only: [:index]
 
@@ -11,6 +12,7 @@ class SpotsController < ApplicationController
   end
 
   def new
+    @spot = Spot.new
   end
 
   def create

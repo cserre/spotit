@@ -2,3 +2,28 @@
  * SASS code SPECIFIC TO your home page
  * (margin/padding adjustments, background image, etc..)
  * ------------------------------------- */
+
+
+.background {
+  margin:0;
+  height: 100vh;
+  background: url(http://studiosdigard.e-monsite.com/medias/album/studio.jpg) no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+  background-position: center center;
+  opacity: 0.75;
+  z-index: 2 ;
+}
+
+.title-home {
+    padding-top: 100px;
+    z-index: 1 ;
+}
+
+.pt-xs {
+    padding-top: 100px;
+}
+
+.title-white {
+  color: white;
+}
