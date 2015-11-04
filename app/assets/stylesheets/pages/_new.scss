@@ -6,10 +6,35 @@
   margin: 50px;
 }
 
+.margin-card {
+  margin-top: 75px
+}
+
 .field {
   font-weight: bold !important;
 }
 
 .border {
   border: 1px solid #565A5C;
+}
+
+.media {
+  display: flex;
+  &-section {
+    margin: 40px auto;
+    padding: 10px;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &-aside {
+    flex: 0 0 350px;
+    padding: 30px;
+    align-self: stretch;
+    background: white;
+    border-left: 1px solid #f0efef;
+  }
 }
