@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_spot, only: [:new, :show, :edit]
-  before_action :set_booking, only: [:show, :edit]
+  before_action :set_spot, only: [:new, :create,:show, :edit, :update]
+  before_action :set_booking, only: [:show, :edit, :update, :delete]
 
   def show
 
@@ -11,16 +11,12 @@ class BookingsController < ApplicationController
   end
 
   def create
-
-    @spot = Spot.find(params[:spot_id])
     @booking = Booking.new(spot_params)
     @booking.spot = @spot
-    n = (@booking.end_time - @booking.start_time)/(365*60*60).to_i
-    @booking.total_price = n*@spot.price
     if @booking.save
-      render :new
+      render 'spots/show'
     else
-      render :new
+       redirect_to spot_path(@spot)
     end
   end
 
@@ -29,6 +25,11 @@ class BookingsController < ApplicationController
   end
 
   def update
+    @booking.update(params[:id])
+  end
+
+  def delete
+    @booking.delete
   end
 
   private
@@ -43,7 +44,7 @@ class BookingsController < ApplicationController
   end
 
   def spot_params
-    params.require(:booking).permit(:start_time, :end_time, :spot_id, :user_id)
+    params.require(:booking).permit(:start_time, :end_time, :spot_id, :user_id, :total_price)
   end
 
 end

@@ -1,0 +1,28 @@
+
+      <%= simple_form_for([ @spot, @booking ]) do |f| %>
+        <%= f.input :start_time %>
+        <%= f.input :end_time %>
+        <%= f.input :total_price %>
+        <%= f.submit %>
+      <% end %>
+
+      <div id = "maj"> Mise à jour </div>
+
+
+
+<!--         Your booking has been created, the total price is :
+        <%= @booking.total_price %>
+      </div>
+    </div>
+ -->
+
+<% javascript_tag do %>
+  $('#maj').on('click', function() {
+    var booking_day = $('#booking_start_time_1i').val();
+
+    <% calcul du total price %>
+
+    $('#booking-total-price').val() = ''
+  })
+
+<% end %>

@@ -1,5 +1,6 @@
+<!-- displayong the lightbox and the bagroung image -->
+
 <div class="banner text-center" style="background-image: url('https://images.unsplash.com/photo-1431578500526-4d9613015464?ixlib=rb-0.3.5&q=80&fm=jpg&s=f03f19c0d451990eb83a01e0c82428ff')">
-<!--   <div class="banner-gradient"></div> -->
   <div class="banner-content">
     <a href="https://images.unsplash.com/photo-1429000263672-1b8b4008d2f7?ixlib=rb-0.3.5&q=80&fm=jpg&s=c5c576cbea95dbb702a717ff4fd1999c" data-lightbox="roadtrip">
       View more
@@ -12,23 +13,12 @@
 
 <div class="container">
 
-<!--     <div>
-      <p>test1</p>
-    </div>
-    <div>
-      <p>test2</p>
-    </div>
-    <div>
-      <p>test3</p>
-    </div>
-  </div> -->
-<!-- displaying the title in upper CASE -->
-
+<!-- displaying the title -->
  <div class="row">
-    <div class="col-xs-12 ">
+    <div class="col-xs-12 col-md-8">
       <div class="row">
         <div class="col-xs-12"><h1><%= @spot.title %></h1> </div>
-        <%= link_to "Do you want to book ?", new_spot_booking_path(@spot), class: "btn" %>
+       <!--  <%= link_to "Do you want to book ?", new_spot_booking_path(@spot), class: "btn" %> -->
       </div>
 
     <!-- displaying the address -->
@@ -57,9 +47,14 @@
 
     </div>
 
-
+    <!-- displaying the bookings -->
+    <div class="col-xs-12 col-md-4">
+        <% @booking = Booking.new() %>
+         <%= render '/bookings/new' %>
+        Your booking is of : <%@booking.total_price %> euro.
     </div>
 
+  </div>
 </div>
 
 
