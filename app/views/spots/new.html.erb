@@ -3,10 +3,71 @@
   <p>Spotit vous permet de gagner de l'argent en louant votre logement</p>
 </div>
 
-  <div class="background-grey">
-    <div class="container">
+<div class="background-grey">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="margin-form">
+          <%= simple_form_for @spot do  |f| %>
+            <%=f.input :city %>
+            <%=f.input :style, collection: ["Bobo", "Ancien", "Classique", "Design"] %>
+            <%=f.input :area %>
+            <%=f.input :modular_furniture, as: :boolean %>
+            <%=f.input :exceptional_view, as: :boolean %>
+            <div class="row title-fieldset">
+              <button type="submit" class="btn btn-danger">Continuer</button>
+            </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
       <%= simple_form_for @spot do  |f| %>
-        <div class="row title-fieldset">
+        <div class="title-fieldset">
           <strong>
           City
           </strong>
@@ -27,48 +88,7 @@
         <div class="row">
           <div class="col-sm-6">
             <%= f.input :style, collection: ["Maison", "Appartement", "Terrain", "Studio"], label: false %>
-            <!-- <div class="btn-group-lg" role="group">
-              <button type="button" class="btn btn-default">Maison</button>
-              <button type="button" class="btn btn-default">Appartement</button>
-              <button type="button" class="btn btn-default">Loft</button>
-              <button type="button" class="btn btn-default">Terrain</button>
-              <button type="button" class="btn btn-default">Studio</button>
-              <div class="btn-group-lg" role="group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Autre
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Cabane</a></li>
-                  <li><a href="#">Villa</a></li>
-                  <li><a href="#">Chateau</a></li>
-                  <li><a href="#">Chalet</a></li>
-                  <li><a href="#">Igloo</a></li>
-                  <li><a href="#">Yourte</a></li>
-                  <li><a href="#">Ile</a></li>
-                  <li><a href="#">Garage</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div> -->
 
-        <!-- <div class="row title-fieldset">
-          <strong>
-          Type de Logement
-          </strong>
-        </div>
-        <div class="row">
-          <div class="col-sm-10">
-            <div class="btn-group-lg" role="group">
-              <button type="button" class="btn btn-default">Vide</button>
-              <button type="button" class="btn btn-default">Meublé Non Modulable</button>
-              <button type="button" class="btn btn-default">Modulable</button>
-              <button type="button" class="btn btn-default">Espace Pro</button>
-              <button type="button" class="btn btn-default">Plateau de tournage</button>
-            </div>
-          </div>
-        </div> -->
         <div class="row title-fieldset">
           <strong>
           Area
@@ -81,30 +101,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row title-fieldset">
-          <strong>
-          Area
-          </strong>
-        </div>
-        <div class="row">
-          <div class="col-sm-10">
-            <div class="btn-group">
-              <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Size Range <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a href="#">20-40sqm</a></li>
-                <li><a href="#">40-80sqm</a></li>
-                <li><a href="#">80-150sqm</a></li>
-                <li><a href="#">150-200sqm</a></li>
-                <li><a href="#">200-300sqm</a></li>
-                <li><a href="#">20-500sqm</a></li>
-                <li><a href="#">500-1000sqm</a></li>
-                <li><a href="#">+1000sqm</a></li>
-              </ul>
-            </div>
-          </div>
-        </div> -->
+
         <div class="row title-fieldset">
           <strong>
           Conveniences
@@ -119,4 +116,4 @@
       <% end %>
     </div>
   </div>
-
+</div> -->
