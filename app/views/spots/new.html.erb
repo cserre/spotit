@@ -9,13 +9,28 @@
       <div class="col-sm-5 col-sm-offset-1">
         <div class="margin-form">
           <%= simple_form_for @spot do  |f| %>
-            <%= f.input :city, placeholder: 'ex: Paris, Lyon, ...', label_html: { class: 'field' } %>
-            <%= f.input :area, placeholder: '(in sqm)', label_html: { class: 'field' } %>
+            <%= f.input :city, placeholder: 'ex: Paris, Lyon, ...' %>
+            <%= f.input :area, placeholder: '(in sqm)' %>
             <%= f.submit "Continuer", class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>
-
+      <div class="col-sm-5 hidden-xs">
+        <div class="box">
+          <div class="row flex">
+            <div class="col-md-6 text-center">
+              <p>Ce que vous pourriez gagner en louant votre bien le temps d'un shooting</p>
+            </div>
+            <div class="col-md-1">
+              <i class="fa fa-arrow-right"></i>
+            </div>
+            <div class="col-md-5 text-center">
+              <h1 id="estimated_earning">0€</h1>
+            <img src="https://a2.muscache.com/airbnb/static/landing_pages/mentorship/earn-money-f250d63dd518732d366297a3183a4b4d.png">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

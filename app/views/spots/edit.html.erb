@@ -17,33 +17,21 @@
             <%= f.input :post_code %>
             <%= f.input :city, value: @spot.city %>
             <%= f.input :area, value: @spot.area %>
-            <%= f.input :style, collection_in: %w( chic rustique industriel cosy ) %>
+            <%= f.input :style, collection: %w( chic rustique industriel cosy ) %>
             <%= f.input :description %>
+        </div>
+      </div>
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="margin-form">
+
             <%= f.input :exposition %>
             <%= f.input :exceptional_view %>
             <%= f.input :modular_furniture %>
-            <%= f.input :price %>
+            <%= f.input :price, label: 'Advised price per day' %>
+            <%= f.hidden_field :visible, value: 'true' %>
 
             <%= f.submit "Continuer", class: "btn btn-primary" %>
-        <% end %>
-
-
-        </div>
-      </div>
-      <div class="col-sm-5 hidden-xs">
-        <div class="box">
-          <div class="row flex">
-            <div class="col-md-6 text-center">
-              <p>Ce que vous pourriez gagner en louant votre bien le temps d'un shooting</p>
-            </div>
-            <div class="col-md-1">
-              <i class="fa fa-arrow-right"></i>
-            </div>
-            <div class="col-md-5 text-center">
-              <h1 id="estimated_earning">0€</h1>
-            <img src="https://a2.muscache.com/airbnb/static/landing_pages/mentorship/earn-money-f250d63dd518732d366297a3183a4b4d.png">
-            </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>

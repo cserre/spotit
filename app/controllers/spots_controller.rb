@@ -1,6 +1,6 @@
 class SpotsController < ApplicationController
 
-  before_action :set_spot, only: [:show, :edit]
+  before_action :set_spot, only: [:show, :edit, :update]
   before_action :set_params, only: [:index]
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:index, :show, :new]
@@ -52,14 +52,30 @@ class SpotsController < ApplicationController
   end
 
   def create
-    @spot = Spot.create(spot_params)
-    redirect_to edit_spot_path(@spot)
+    @spot = Spot.new(spot_params)
+    if @spot.save
+      redirect_to edit_spot_path(@spot)
+    else
+      render :new
+    end
   end
 
   def edit
+    @spot.street = ""
+    @spot.post_code = ""
+    @spot.street = ""
+    @spot.style = ""
+    @spot.description = ""
+    @spot.exposition = ""
+    @spot.price = @spot.area * 4
   end
 
   def update
+    if @spot.update(spot_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
 
@@ -72,7 +88,7 @@ class SpotsController < ApplicationController
     @params = params
   end
   def spot_params
-    params.require(:spot).permit(:title, :address, :description, :price, :user_id,
+    params.require(:spot).permit(:title, :street, :description, :price, :user_id,
       :visible, :city, :style, :post_code, :area, :exposition, :exceptional_view,
       :modular_furniture)
   end

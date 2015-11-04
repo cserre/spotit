@@ -58,4 +58,15 @@
   margin-top: 50px;
   border: none;
 }
-
+.navbar-wagon a:hover {
+  text-decoration: none;
+}
+.logo-name {
+  font-family: 'Niconne', cursive;
+  font-size: 35px;
+  color: $blue;
+  margin-left: 10px;
+  &-home {
+    color: white;
+  }
+}
