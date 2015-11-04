@@ -1,0 +1,46 @@
+
+<!-- Creating the form for the bookings  -->
+
+<%= simple_form_for([ @spot, @booking ]) do |f| %>
+  <%= f.input :start_time %>
+  <%= f.input :end_time %>
+  <%= f.input :total_price , :as => :hidden %>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
+<p id="tt_price" class="card-margin"> Please modify the dates to calculate the price</p>
+
+
+  <% content_for(:after_js) do %>
+    <% javascript_tag do %>
+      $('#new_booking').on('change', function() {
+
+     <!--  getting all the variables from the form -->
+        var start_booking_year = $('#booking_start_time_1i').val();
+        var start_booking_month = $('#booking_start_time_2i').val();
+        var start_booking_date = $('#booking_start_time_3i').val();
+        var end_booking_year = $('#booking_end_time_1i').val();
+        var end_booking_month = $('#booking_end_time_2i').val();
+        var end_booking_date = $('#booking_end_time_3i').val();
+
+    <!--  creating the dates to be able to calculate the price -->
+        var start_date = new Date(start_booking_year,start_booking_month,start_booking_date);
+
+        var end_date = new Date(end_booking_year,end_booking_month,end_booking_date);
+
+    <!--  calculating the total price for the booking-->
+      var total_price = Math.round(
+      <%= @spot.price %> * (end_date-start_date + 1) / (1000*60*60*24));
+
+    <!--  Setting the total price for the booking-->
+      $("#booking_total_price").val(total_price);
+
+    <!--  Displaying to the view the total price for the booking-->
+      $("#tt_price").text('your price would be of ' + total_price + ' €');
+      })
+
+
+    <% end %>
+  <% end %>
+
+
+
