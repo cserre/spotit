@@ -1,5 +1,6 @@
 <% content_for :nav, render('shared/navbar_home') %>
 
+
 <div class="background">
   <div class="bg-gradient flex">
     <div class="form-group">
@@ -11,28 +12,6 @@
     </div>
   </div>
 </div>
-<!--
-<div class="container">
-  <div class="row">
-    <% 6.times do %>
-      <div class="col-sm-4">
-        <div class="card">
-          <span class="card-bg" style="background-image: url(<%= image_path 'http://kevinfluchaire.com/wp-content/uploads/2012/06/MakingOF_CLIPKevin_175.jpg' %>)"></span>
-          <span class="card-gradient"></span>
-          <span class="card-price">
-            <%= @spots.first.price.to_i.to_s + ' €/day' %>
-          </span>
-          <%= link_to "", spot_path(@spots.first),class: 'card-link' %>
-        </div>
-        <div class="card-detail">
-          <div><%= @spots.first.title %></div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
 
 
-
- -->
 
