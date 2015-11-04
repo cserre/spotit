@@ -13,10 +13,11 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(spot_params)
     @booking.spot = @spot
+    # @booking.total_price = @spot.price *(@booking.start_time-@booking.end_time)
     if @booking.save
-      render 'spots/show'
+      render :show
     else
-       redirect_to spot_path(@spot)
+      redirect_to spot_path(@spot)
     end
   end
 
