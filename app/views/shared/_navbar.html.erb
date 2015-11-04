@@ -7,9 +7,7 @@
 
     <div class="navbar-wagon-pusher"></div>
 
-    <hr class="hidden-xs hidden-sm">
     <% if user_signed_in? %>
-      <hr>
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <%= image_tag current_user.picture, class: "avatar avatar-bordered dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>

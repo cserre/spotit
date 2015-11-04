@@ -6,31 +6,27 @@
 <div class="background-grey">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-9 col-md-6">
+      <div class="col-sm-5 col-sm-offset-1">
         <div class="margin-form">
           <%= simple_form_for @spot do  |f| %>
-            <%=f.input :city, placeholder: 'ex: Paris, Lyon, ...', label_html: { class: 'field' } %>
-            <%=f.input :style, collection: ["Bobo", "Ancien", "Classique", "Design"],label_html: { class: 'field' } %>
-            <%=f.input :area, placeholder: '(in sqm)', label_html: { class: 'field' } %>
-            <%=f.input :modular_furniture, as: :boolean %>
-            <%=f.input :exceptional_view, as: :boolean %>
-            <div class="row title-fieldset">
-              <button type="submit" class="btn btn-danger">Continuer</button>
-            </div>
-        <% end %>
+            <%= f.input :city, placeholder: 'ex: Paris, Lyon, ...', label_html: { class: 'field' } %>
+            <%= f.input :area, placeholder: '(in sqm)', label_html: { class: 'field' } %>
+            <%= f.submit "Continuer", class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
-      <div class="col-md-offset-3 col-md-3">
-        <div class="border hidden-sm hidden-xs margin-card">
-          <div class="media-aside">
-              <section class="media-section text-center">
-                <p>Ce que vous pourriez gagner en louant votre bien le temps d'un shooting:</p>
-                <h1 class="field">350€</h1>
-                <img src="https://a2.muscache.com/airbnb/static/landing_pages/mentorship/earn-money-f250d63dd518732d366297a3183a4b4d.png">
-              </section>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>
+
+
+<% content_for(:after_js) do %>
+  <% javascript_tag do %>
+    $('#spot_area').on('keyup', function() {
+      var area = $(this).val();
+      var total_price = area * 50;
+      $("#estimated_earning").text(total_price + ' €');
+    })
+  <% end %>
+<% end %>

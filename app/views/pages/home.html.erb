@@ -5,9 +5,9 @@
   <div class="bg-gradient flex">
     <div class="form-group">
       <%= form_tag('/spots', method: 'get', :class => "form-inline") do %>
-         <div class="title-home text-right"><%= select_tag :city, options_for_select(%w( PARIS LYON )) %><i class="fa fa-arrow-circle-down"></i> EST VOTRE STUDIO</div>
+         <div class="title-home text-right"><span class="box-home"><%= select_tag :city, options_for_select(%w( PARIS LYON )) %></span> EST VOTRE STUDIO</div>
          <div class="text-center">
-          <%= submit_tag "Find your perfect place", class: 'btn btn-primary' %></div>
+          <%= submit_tag "Find your perfect place", class: 'btn btn-primary btn-home' %></div>
       <% end %>
     </div>
   </div>

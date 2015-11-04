@@ -1,0 +1,62 @@
+<% if !(@spot.visible) %>
+  <div class="title-new text-center">
+    <h2>Finalisez votre annonce pour la publier</h2>
+    <p>Spotit vous permet de gagner de l'argent en louant votre logement</p>
+  </div>
+<% end %>
+
+<div class="background-grey">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="margin-form">
+
+          <%= simple_form_for @spot do  |f| %>
+
+            <%= f.input :street %>
+            <%= f.input :post_code %>
+            <%= f.input :city, value: @spot.city %>
+            <%= f.input :area, value: @spot.area %>
+            <%= f.input :style, collection_in: %w( chic rustique industriel cosy ) %>
+            <%= f.input :description %>
+            <%= f.input :exposition %>
+            <%= f.input :exceptional_view %>
+            <%= f.input :modular_furniture %>
+            <%= f.input :price %>
+
+            <%= f.submit "Continuer", class: "btn btn-primary" %>
+        <% end %>
+
+
+        </div>
+      </div>
+      <div class="col-sm-5 hidden-xs">
+        <div class="box">
+          <div class="row flex">
+            <div class="col-md-6 text-center">
+              <p>Ce que vous pourriez gagner en louant votre bien le temps d'un shooting</p>
+            </div>
+            <div class="col-md-1">
+              <i class="fa fa-arrow-right"></i>
+            </div>
+            <div class="col-md-5 text-center">
+              <h1 id="estimated_earning">0€</h1>
+            <img src="https://a2.muscache.com/airbnb/static/landing_pages/mentorship/earn-money-f250d63dd518732d366297a3183a4b4d.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for(:after_js) do %>
+  <% javascript_tag do %>
+    $('#spot_area').on('keyup', function() {
+      var area = $(this).val();
+      var total_price = area * 50;
+      $("#estimated_earning").text(total_price + ' €');
+    })
+  <% end %>
+<% end %>
