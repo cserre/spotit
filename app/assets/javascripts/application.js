@@ -5,3 +5,5 @@
 //= require lightbox
 //= require_tree .
 //= require bootstrap-slider
+//= require underscore
+//= require gmaps/google
