@@ -3,7 +3,7 @@
 <div class="banner text-center" style="background-image: url('https://images.unsplash.com/photo-1431578500526-4d9613015464?ixlib=rb-0.3.5&q=80&fm=jpg&s=f03f19c0d451990eb83a01e0c82428ff')">
   <div class="banner-content">
     <a href="https://images.unsplash.com/photo-1429000263672-1b8b4008d2f7?ixlib=rb-0.3.5&q=80&fm=jpg&s=c5c576cbea95dbb702a717ff4fd1999c" data-lightbox="roadtrip">
-      View more
+      <p>View more</p>
     </a>
     <a href="https://images.unsplash.com/photo-1437935593714-0e005a38bf51?ixlib=rb-0.3.5&q=80&fm=jpg&s=726f9800d377a56c7349f3770f268a24" data-lightbox="roadtrip"></a>
     <a href="https://images.unsplash.com/photo-1427806208781-b36531cb09ef?ixlib=rb-0.3.5&q=80&fm=jpg&s=655d2e0667713c786bbc4a6edee06120" data-lightbox="roadtrip"></a>
@@ -17,7 +17,7 @@
  <div class="row">
     <div class="col-xs-12 col-md-8">
       <div class="row">
-        <div class="col-xs-12"><h1><%= @spot.title %></h1> </div>
+        <div class="col-xs-12"><h2><%= @spot.title %></h2> </div>
        <!--  <%= link_to "Do you want to book ?", new_spot_booking_path(@spot), class: "btn" %> -->
       </div>
 
@@ -32,14 +32,14 @@
 
     <!-- displaying all the features of the spot -->
       <div class="row">
-        <div class="col-xs-12 col-md-3">Style : <strong><%= @spot.style %></strong></div>
-        <div class="col-xs-12 col-md-3">m2 : <strong><%= @spot.area %></strong></div>
-        <div class="col-xs-12 col-md-3">Exposition : <strong><%= @spot.exposition %></strong></div>
-        <div class="col-xs-12 col-md-3">Modular furniture : <strong><%= @spot.modular_furniture %></strong></div>
+        <div class="col-xs-12 col-md-3"><%= image_tag "style.png" %> : </strong> <strong><%= @spot.style %></strong></div>
+        <div class="col-xs-12 col-md-3"><%= image_tag "squaremeter.png" %> : <strong><%= @spot.area %></strong></div>
+        <div class="col-xs-12 col-md-3"><%= image_tag "exposition.png" %> : <strong><%= @spot.exposition %></strong></div>
+        <div class="col-xs-12 col-md-3"><%= image_tag "furniture.png" %> : <strong><%= "modular" if @spot.modular_furniture %></strong></div>
       </div>
 
     <!-- displaying the description -->
-      <div class="row">
+      <div class="row padded" >
         <div class="col-xs-12"><p> <strong>En savoir plus sur le bien : </strong><%= @spot.description %></p></div>
         <div class="col-xs-12"><p><%= @spot.price %> € / demi-journée</p></div>
         <div class="col-xs-12">Exceptional view : <strong><%= @spot.exceptional_view %></strong></div>
@@ -48,7 +48,8 @@
     </div>
 
     <!-- displaying the bookings -->
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-md-4 bg-grey">
+      <strong>Please, choose your booking dates</strong>
         <% @booking = Booking.new() %>
          <%= render '/bookings/new' %>
     </div>
