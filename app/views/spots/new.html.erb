@@ -4,7 +4,8 @@
 </div>
 
   <div class="background-grey">
-      <div class="container">
+    <div class="container">
+      <%= simple_form_for @spot do  |f| %>
         <div class="row title-fieldset">
           <strong>
           City
@@ -13,7 +14,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="input-group ">
-              <span class="glyphicon glyphicon-map-marker"></span><input type="text" class="form-control" placeholder="City">
+              <span class="glyphicon glyphicon-map-marker"></span><input type="text" class="form-control" placeholder="City" name="city">
             </div>
           </div>
         </div>
@@ -24,8 +25,9 @@
           </strong>
         </div>
         <div class="row">
-          <div class="col-sm-10">
-            <div class="btn-group-lg" role="group">
+          <div class="col-sm-6">
+            <%= f.input :style, collection: ["Maison", "Appartement", "Terrain", "Studio"], label: false %>
+            <!-- <div class="btn-group-lg" role="group">
               <button type="button" class="btn btn-default">Maison</button>
               <button type="button" class="btn btn-default">Appartement</button>
               <button type="button" class="btn btn-default">Loft</button>
@@ -49,7 +51,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- <div class="row title-fieldset">
           <strong>
@@ -75,7 +77,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="input-group ">
-              <span class="glyphicon glyphicon-fullscreen"></span><input type="text" class="form-control" placeholder="Area">
+              <span class="glyphicon glyphicon-fullscreen"></span><input type="text" class="form-control" placeholder="Area" name="area">
             </div>
           </div>
         </div>
@@ -105,24 +107,16 @@
         </div> -->
         <div class="row title-fieldset">
           <strong>
-          Modular Furniture
+          Conveniences
           </strong>
         </div>
-        <div class="row">
-          <div class="col-lg-1">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <input type="checkbox" aria-label="...">
-              </span>
-            </div><!-- /input-group -->
-          </div>
-        </div>
-
-
+        <%=f.input :modular_furniture, as: :boolean %>
+        <%=f.input :exceptional_view, as: :boolean %>
 
         <div class="row title-fieldset">
-          <button type="button" class="btn btn-danger"><a href="http://google.com" class="button">Continuer</a></button>
+          <button type="submit" class="btn btn-danger">Continuer</button>
         </div>
-      </div>
+      <% end %>
+    </div>
   </div>
 
