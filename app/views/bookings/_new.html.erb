@@ -5,9 +5,9 @@
   <%= f.input :start_time %>
   <%= f.input :end_time %>
   <%= f.input :total_price , :as => :hidden %>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>
-<p id="tt_price"> Hello - Please modify the dates to calculate the price</p>
+<p id="tt_price" class="card-margin"> Please modify the dates to calculate the price</p>
 
 
   <% content_for(:after_js) do %>

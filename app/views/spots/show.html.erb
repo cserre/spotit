@@ -1,12 +1,12 @@
 <!-- displayong the lightbox and the bagroung image -->
 
-<div class="banner text-center" style="background-image: url('https://images.unsplash.com/photo-1431578500526-4d9613015464?ixlib=rb-0.3.5&q=80&fm=jpg&s=f03f19c0d451990eb83a01e0c82428ff')">
+<div class="banner text-center" style="background-image: url(<%= image_path 'loft1.png' %>)">
   <div class="banner-content">
-    <a href="https://images.unsplash.com/photo-1429000263672-1b8b4008d2f7?ixlib=rb-0.3.5&q=80&fm=jpg&s=c5c576cbea95dbb702a717ff4fd1999c" data-lightbox="roadtrip">
+    <a href= <%= image_path 'loft2.png' %> data-lightbox="roadtrip">
       <p>View more</p>
     </a>
-    <a href="https://images.unsplash.com/photo-1437935593714-0e005a38bf51?ixlib=rb-0.3.5&q=80&fm=jpg&s=726f9800d377a56c7349f3770f268a24" data-lightbox="roadtrip"></a>
-    <a href="https://images.unsplash.com/photo-1427806208781-b36531cb09ef?ixlib=rb-0.3.5&q=80&fm=jpg&s=655d2e0667713c786bbc4a6edee06120" data-lightbox="roadtrip"></a>
+    <a href=<%= image_path 'loft3.png' %> data-lightbox="roadtrip"></a>
+    <a href=<%= image_path 'loft1.png' %> data-lightbox="roadtrip"></a>
   </div>
 </div>
 
@@ -48,8 +48,8 @@
     </div>
 
     <!-- displaying the bookings -->
-    <div class="col-xs-12 col-md-4 bg-grey">
-      <strong>Please, choose your booking dates</strong>
+    <div class="col-xs-12 col-md-4 bg-blue card-big">
+      <p class="card-margin"><strong >Please, choose your booking dates</strong> </p>
         <% @booking = Booking.new() %>
          <%= render '/bookings/new' %>
     </div>
