@@ -7,6 +7,7 @@ gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'omniauth-facebook'
+gem "coffee-rails"
 
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
@@ -16,9 +17,15 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
+# Gems pour les cartes
+gem "geocoder"
+gem "gmaps4rails"
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-slick.js'
   gem 'rails-assets-lightbox'
+  # for Gmaps4rails
+  gem "rails-assets-underscore"
 end
 
 
@@ -38,3 +45,10 @@ end
 
 # Gem pour le slider de prix
 gem 'bootstrap-slider-rails'
+
+# Gem pour la pagination
+gem 'kaminari'
+
+
+
+

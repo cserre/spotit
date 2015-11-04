@@ -3,5 +3,7 @@
 //= require bootstrap-sprockets
 //= require slick.js/slick.js
 //= require lightbox
-//= require_tree .
 //= require bootstrap-slider
+//= require underscore
+//= require gmaps/google
+//= require_tree .

@@ -7,23 +7,42 @@
 .background {
   margin:0;
   height: 100vh;
-  background: url(http://studiosdigard.e-monsite.com/medias/album/studio.jpg) no-repeat center fixed;
+  // background: image-url('spot-it-3.jpg') no-repeat center fixed;
+  background: url('http://studiosdigard.e-monsite.com/medias/album/studio.jpg') no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+  z-index: 0 ;
+  margin-top: -70px;
+}
+.bg-gradient {
+  background-image: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 80%);
+  margin:0;
+  height: 100vh;
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
   background-position: center center;
-  opacity: 0.75;
-  z-index: 2 ;
-}
 
+}
 .title-home {
-    padding-top: 100px;
-    z-index: 1 ;
-}
-
-.pt-xs {
-    padding-top: 100px;
-}
-
-.title-white {
+  font-size: 50px;
+  font-family: $header-font;
+  font-weight: 700;
   color: white;
+
+  select {
+    font-size: 50px;
+    background: transparent;
+    color: white;
+    border: 0;
+    border-radius: 0;
+    height: 70px;
+      -webkit-appearance: none;
+
+  }
 }
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
