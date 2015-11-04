@@ -18,4 +18,13 @@ class Spot < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+
+  def address
+    [street, post_code, city].compact.join(', ')
+  end
+
+  def address_changed?
+    street_changed? || post_code_changed? || city_changed?
+  end
+
 end
