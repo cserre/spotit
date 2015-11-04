@@ -17,6 +17,10 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
+# Gems pour les cartes
+gem "geocoder"
+gem "gmaps4rails"
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-slick.js'
   gem 'rails-assets-lightbox'
@@ -45,8 +49,6 @@ gem 'bootstrap-slider-rails'
 # Gem pour la pagination
 gem 'kaminari'
 
-# Gems pour les cartes
-gem "geocoder"
-gem "gmaps4rails"
+
 
 

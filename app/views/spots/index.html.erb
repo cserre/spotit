@@ -58,7 +58,7 @@
   <!-- show all spots according to filters -->
   <div class="row">
     <div class="col-xs-12" style="padding-top: 30px;">
-      <p>Find your perfect shooting place in <%= @params["city"].capitalize %> :</p>
+      <p><%= @spots_total_number %> results in <%= @params["city"].capitalize %> :</p>
     </div>
 
     <% @spots_selected.each do |spot| %>
@@ -86,114 +86,11 @@
 </div>
 <!-- block for map -->
 
-<div id="map">MAP</div>
+<div id="map"></div>
 
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js&key=AIzaSyAWJWKuKsqT_xm8Z2qtMvu2s0d1TLAIeoc"></script>
-
-<script type="text/javascript">
-  var myLatlng = new google.maps.LatLng(48.852937,2.364178);
-  // var myLatlng2 = new google.maps.LatLng(48.852,2.364178);
-  var myOptions = {
-    zoom: 16,
-    center: myLatlng,
-    scrollwheel: false,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    styles: [
-  {
-      "featureType": "administrative",
-      "elementType": "labels.text.fill",
-      "stylers": [
-          {
-              "color": "#444444"
-          }
-      ]
-  },
-  {
-      "featureType": "landscape",
-      "elementType": "all",
-      "stylers": [
-          {
-              "color": "#f2f2f2"
-          }
-      ]
-  },
-  {
-      "featureType": "poi",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
-  },
-  {
-      "featureType": "road",
-      "elementType": "all",
-      "stylers": [
-          {
-              "saturation": -100
-          },
-          {
-              "lightness": 45
-          }
-      ]
-  },
-  {
-      "featureType": "road.highway",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "simplified"
-          }
-      ]
-  },
-  {
-      "featureType": "road.arterial",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
-  },
-  {
-      "featureType": "transit",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
-  },
-  {
-      "featureType": "water",
-      "elementType": "all",
-      "stylers": [
-          {
-              "color": "#2c3e50"
-          },
-          {
-              "visibility": "on"
-          }
-      ]
-  }
-  ]
-  };
-  var map = new google.maps.Map(document.getElementById('map'), myOptions);
-  var marker = new google.maps.Marker({
-    position: myLatlng,
-    map: map,
-    title: "You are here!"
-  });
-  // var marker = new google.maps.Marker({
-  //   position: myLatlng2,
-  //   map: map,
-  //   title: "You are here!"
-  // });
-</script>
 
 <%= content_for(:after_js) do %>
+  <!-- script for sliders -->
   <%= javascript_tag do %>
     var sliderPrice = $('.slider-price').slider();
     var sliderArea = $('.slider-area').slider();
@@ -205,6 +102,20 @@
       var valueArea = <%= @params["area"].to_i %>;
       sliderArea.slider('setValue', valueArea);
     <% end %>
+  <% end %>
+  <!-- script for map -->
+  <%= javascript_tag do %>
+    var myStyle = [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}];
+
+    $(document).on('ready', function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' }, provider: { styles: myStyle } }, function(){
+        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+        console.log(markers);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    });
   <% end %>
 <% end %>
 

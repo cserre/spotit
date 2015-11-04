@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_spot, only: [:new, :show, :edit]
   before_action :set_booking, only: [:show, :edit]
+  before_action :authenticate_user!
 
   def show
 

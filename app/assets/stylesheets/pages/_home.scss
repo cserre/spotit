@@ -11,8 +11,8 @@
   background: url('http://studiosdigard.e-monsite.com/medias/album/studio.jpg') no-repeat center fixed;
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
-  background-position: center center;
   z-index: 0 ;
+  margin-top: -70px;
 }
 .bg-gradient {
   background-image: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 80%);
@@ -36,20 +36,9 @@
     border-radius: 0;
     height: 70px;
       -webkit-appearance: none;
+
   }
 }
-// .title-home {
-//     padding-top: 100px;
-//     z-index: 1 ;
-// }
-
-// .pt-xs {
-//     padding-top: 100px;
-// }
-
-// .title-white {
-//   color: white;
-// }
 
 .flex {
   display: flex;

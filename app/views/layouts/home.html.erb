@@ -9,12 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <% if content_for? :nav %>
-      <%= content_for :nav %>
-    <% else %>
-      <%= render '/shared/navbar' %>
-    <% end %>
-
+    <%= render '/shared/navbar-home' %>
     <%= render '/shared/flashes' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>

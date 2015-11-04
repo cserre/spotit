@@ -2,6 +2,8 @@ class SpotsController < ApplicationController
 
   before_action :set_spot, only: [:show, :edit]
   before_action :set_params, only: [:index]
+  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index, :show, :new]
 
   def index
     @spots = Spot.all
@@ -28,18 +30,18 @@ class SpotsController < ApplicationController
       && @params["exposition"] == "on"
       @spots_selected = @spots_selected.where("exposition = ?", true)
     end
+    @spots_total_number = @spots_selected.length
     @spots_selected = @spots_selected.page params[:page]
 
-    # if @spots_selected
-    #   @message = "No result found."
-    #   if !(@params["city"].nil? || @params["city"] == "")
-    #     @spots_selected = Spot.all.where("city = ?", @params["city"].capitalize).page params[:page]
-    #   else
-    #     @spots_selected = Spot.all.page params[:page]
-    #   end
-    # else
-    #   @spots_selected = @spots_selected.page params[:page]
-    # end
+    @markers = Gmaps4rails.build_markers(@spots_selected) do |spot, marker|
+      marker.lat spot.latitude
+      marker.lng spot.longitude
+      # marker.picture({
+      #   :url => ActionController::Base.helpers.asset_path('marker.png'),#{ }"http://placehold.it/30x30",
+      #   :width   => 28,
+      #   :height  => 35
+      #  })
+    end
   end
 
   def show
@@ -57,6 +59,7 @@ class SpotsController < ApplicationController
 
   def update
   end
+
 
   private
   def set_spot
