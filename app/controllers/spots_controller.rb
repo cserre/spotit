@@ -50,6 +50,8 @@ class SpotsController < ApplicationController
   end
 
   def create
+    @spot = Spot.create(spot_params)
+    redirect_to edit_spot_path(@spot)
   end
 
   def edit
