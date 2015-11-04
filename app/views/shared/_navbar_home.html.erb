@@ -1,8 +1,8 @@
-<nav class="navbar-wagon">
+<nav class="navbar-wagon navbar-wagon-home">
   <div class="container navbar-wagon-container">
 
     <a href="/">
-      <%= image_tag "logo_blue.png", class: 'navbar-wagon-logo' %>
+      <%= image_tag "logo_white.png", class: 'navbar-wagon-logo' %>
     </a>
 
     <div class="navbar-wagon-pusher"></div>
@@ -49,9 +49,9 @@
       </div>
     <% else %>
 
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-home-link" %>
     <% end %>
     <hr>
-    <%= link_to t(".top_call_to_action", default: "Add a New Spot"), new_spot_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <%= link_to t(".top_call_to_action", default: "Add a New Spot"), new_spot_path, class: "navbar-wagon-item navbar-wagon-home-button btn" %>
   </div>
 </nav>
