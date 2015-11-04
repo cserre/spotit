@@ -49,6 +49,9 @@ gem 'bootstrap-slider-rails'
 # Gem pour la pagination
 gem 'kaminari'
 
+# paperclib to upload images
+gem 'aws-sdk', '< 2.0'
+gem 'paperclip'
 
 
 
