@@ -19,6 +19,8 @@ gem 'autoprefixer-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-slick.js'
   gem 'rails-assets-lightbox'
+  # for Gmaps4rails
+  gem "rails-assets-underscore"
 end
 
 
@@ -41,3 +43,9 @@ gem 'bootstrap-slider-rails'
 
 # Gem pour la pagination
 gem 'kaminari'
+
+# Gems pour les cartes
+gem "geocoder"
+gem "gmaps4rails"
+
+

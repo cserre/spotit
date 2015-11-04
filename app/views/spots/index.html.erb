@@ -1,19 +1,19 @@
+<!-- set max and min price, max and min area for the city selected -->
 <% prices = [] %>
 <% areas = [] %>
-<% selected_spots = [] %>
 <% @spots.each do |spot| %>
-  <% if spot.visible && ((@params["city"].nil? || @params["city"] == "") ? true : spot.city == @params["city"]) %>
+  <% if spot.visible && ((@params["city"].nil? || @params["city"] == "") ? true : spot.city.downcase == @params["city"].downcase) %>
     <% prices << spot.price %>
     <% areas << spot.area %>
-    <% selected_spots << spot %>
   <% end %>
 <% end %>
-<% selected_spots %>
 <% max_price = prices.sort.last.to_i %>
 <% min_price = prices.sort.first.to_i %>
 <% max_area = areas.sort.last.to_i %>
 <% min_area = areas.sort.first.to_i %>
-<% @params["price"].to_i %>
+
+<!-- find all spots macthing criteria -->
+
 
 <div class="sidebar sidebar-padded">
   <!-- form to add specific filters and refresh this page -->
@@ -21,33 +21,31 @@
     <div class="col-xs-12">
       <%= form_tag(spots_path, method: 'get') do %>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-sm-7">
             <div class="form-group">
-              <%= label_tag :price, "Price:" %>
+              <%= label_tag :price, "Max price:" %>
               <%= text_field_tag :price, nil, class: 'slider-price span2', data: { :"slider-id" => 'slider-price', :"slider-min" => min_price, :"slider-max" => max_price, :"slider-step" => 100, :"slider-value" => max_price } %>
             </div>
             <div class="form-group">
-              <%= label_tag :area, "Area:" %>
+              <%= label_tag :area, "Min area:" %>
               <%= text_field_tag :area, nil, class: 'slider-area span2', data: { :"slider-id" => 'slider-area', :"slider-min" => min_area, :"slider-max" => max_area, :"slider-step" => 1, :"slider-value" => min_area, :"slider-selection" => "after"} %>
             </div>
             <div class="form-group form-inline">
-              <%= label_tag :city, "City:" %>
-              <%= text_field_tag :city, @params["city"], class: 'form-control' %>
+              <!-- <%= label_tag :city, "City:" %> -->
+              <%= hidden_field_tag :city, @params["city"], class: 'form-control' %>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="form-group">
               <%= label_tag :exceptional_view, "Exceptional view:" %>
-              <%= check_box_tag :exceptional_view, nil, class: 'form-control' %>
+              <%= check_box_tag :exceptional_view, checked: false, class: 'form-control' %>
             </div>
             <div class="form-group">
               <%= label_tag :modular_furniture, "Modular furniture:" %>
-              <%= check_box_tag :modular_furniture, nil, class: 'form-control' %>
+              <%= check_box_tag :modular_furniture, checked: false, class: 'form-control' %>
             </div>
-            <!-- <div class="form-group">
-              <%= label_tag :exposition, "Exposition:" %>
-              <%= select_tag :exposition, options_for_select(['N', 'S', 'E', 'O']), multiple: true %>
-            </div> -->
+          </div>
+          <div class="text-center">
             <%= submit_tag "Find", class: 'btn btn-primary' %>
           </div>
         </div>
@@ -56,12 +54,15 @@
     </div>
   </div>
 
+
   <!-- show all spots according to filters -->
   <div class="row">
-    <% @spots.each do |spot| %>
-      <% if spot.visible && (@params["price"].nil? ? true : spot.price <= @params["price"].to_i)  && ((@params["city"].nil? || @params["city"] == "") ? true : spot.city == @params["city"]) && ((@params["style"].nil? || @params["style"] == "") ? true : spot.style == @params["style"] && ((@params["area"].nil? || @params["area"] == "") ? true : spot.area >= @params["area"].to_i) && (@params["exceptional_view"].nil? ? true : spot.exceptional_view == true) && (@params["modular_furniture"].nil? ? true : spot.modular_furniture == true) && (@params["exposition"].nil? ? true : @params["exposition"].any? { |expo| expo == spot.exposition}))
-          %>
-        <div class="col-md-6">
+    <div class="col-xs-12" style="padding-top: 30px;">
+      <p>Find your perfect shooting place in <%= @params["city"].capitalize %> :</p>
+    </div>
+
+    <% @spots_selected.each do |spot| %>
+      <div class="col-md-6">
         <div class="card">
           <span class="card-bg" style="background-image: url(<%= image_path 'loft1.png' %>)"></span>
           <span class="card-gradient"></span>
@@ -79,9 +80,8 @@
         </div>
 
       </div>
-      <% end %>
     <% end %>
-    <%= paginate @spots %>
+    <%= paginate @spots_selected %>
   </div>
 </div>
 <!-- block for map -->
@@ -89,7 +89,7 @@
 <div id="map">MAP</div>
 
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js&key=AIzaSyAWJWKuKsqT_xm8Z2qtMvu2s0d1TLAIeoc"></script>
 
 <script type="text/javascript">
   var myLatlng = new google.maps.LatLng(48.852937,2.364178);

@@ -1,42 +1,37 @@
 
 <div class="background">
-  <div class="title-home">
-    <div class="container">
-      <div class="row">
-        <div class=" col-xs-8 col-sm-10 col-xs-offset-1 text-center">
-          <h1 class="title-white">BIENVENUE DANS VOTRE STUDIO</h1>
-          <div class="form-group pt-xs">
-              <%= form_tag('/spots', method: 'get', :class => "form-inline") do %>
-
-                 <%= text_field_tag :city, nil, placeholder: "City", class: 'form-control' %>
-                 <%= text_field_tag :style, nil, placeholder: "Style", class: 'form-control' %>
-                 <%= text_field_tag :area, nil, placeholder: "Area", class: 'form-control' %>
-
-                 <%= submit_tag "Search", class: 'btn btn-primary' %>
-              <% end %>
-          </div>
-        </div>
-      </div>
+  <div class="bg-gradient flex">
+    <div class="form-group">
+      <%= form_tag('/spots', method: 'get', :class => "form-inline") do %>
+         <div class="title-home text-right"><%= select_tag :city, options_for_select(%w( PARIS LYON BDX )) %><i class="fa fa-arrow-circle-down"></i> EST VOTRE STUDIO</div>
+         <div class="text-center">
+          <%= submit_tag "Find your perfect place", class: 'btn btn-primary' %></div>
+      <% end %>
     </div>
   </div>
 </div>
 
-<div>
-        <% 6.times do %>
-          <div class="col-xs-12 col-sm-4">
-            <div class="card">
-             <span class="card-bg" style="background-image: url(<%= image_path 'http://kevinfluchaire.com/wp-content/uploads/2012/06/MakingOF_CLIPKevin_175.jpg' %>)"></span>
-             <span class="card-gradient"></span>
-             <span class="card-price">
-               <%= @spots.first.price.to_i.to_s + ' €/day' %>
-             </span>
-             <%= link_to "", spot_path(@spots.first),class: 'card-link' %>
-             </div>
-             <div class="card-detail">
-               <div><%= @spots.first.title %></div>
-             </div>
-           </div>
-          </div>
-        <% end %>
+<div class="container">
+  <div class="row">
+    <% 6.times do %>
+      <div class="col-sm-4">
+        <div class="card">
+          <span class="card-bg" style="background-image: url(<%= image_path 'http://kevinfluchaire.com/wp-content/uploads/2012/06/MakingOF_CLIPKevin_175.jpg' %>)"></span>
+          <span class="card-gradient"></span>
+          <span class="card-price">
+            <%= @spots.first.price.to_i.to_s + ' €/day' %>
+          </span>
+          <%= link_to "", spot_path(@spots.first),class: 'card-link' %>
+        </div>
+        <div class="card-detail">
+          <div><%= @spots.first.title %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+
+
+
 
