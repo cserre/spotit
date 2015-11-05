@@ -1,0 +1,35 @@
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation" class="active"><%=link_to "Profil", edit_user_registration_path(@user) %>
+</li>
+  <li role="presentation"><%=link_to "Review", "#"  %></li>
+  <li role="presentation"><%=link_to "Messages", "#"  %></li>
+</ul>
+<h1>My Profile</h1>
+<%= image_tag current_user.picture %>
+<h1>Bonjour, je m'appelle <%= @user.first_name %></h1>
+<p>Membre depuis<%= @user.remember_created_at %></p>
+<%=link_to "Modifier le Profil", edit_user_registration_path(@user) %>
+
+<h2>My spots:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12" style="padding-top: 30px;">
+      <% @user.spots.each do |spot| %>
+        <div class="col-md-6">
+          <div class="card">
+            <span class="card-bg" style="background-image: url(<%= image_path spot.photos.first.picture.url(:medium) %>)"></span>
+            <span class="card-gradient"></span>
+            <span class="card-price">
+              <%= spot.price.to_i.to_s + ' €/day' %>
+            </span>
+            <%= link_to "", spot_path(spot),class: 'card-link' %>
+          </div>
+          <div class="card-detail">
+            <div class="title"><%= spot.title %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
