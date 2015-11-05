@@ -21,12 +21,15 @@
             <%= f.input :modular_furniture %>
             <%= f.input :price, label: 'Price per day' %>
             <%= f.hidden_field :visible, value: 'true' %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
 
             <p>Pictures</p>
-            <%= f.fields_for :photos do |photos_form| %>
-              <%= photos_form.file_field :picture, class: 'inline' %><%= photos_form.link_to_remove ('<i class="fa fa-trash"></i>').html_safe, class: 'inline' %>
-            <% end %>
-            <p><%= f.link_to_add ('<i class="fa fa-plus"></i>').html_safe, :photos %></p>
+            <div id="pics">
+              <%= f.fields_for :photos do |photos_form| %>
+                <%= photos_form.file_field :picture, class: 'inline' %><%= photos_form.link_to_remove ('<i class="fa fa-trash"></i>').html_safe, class: 'inline' %>
+              <% end %>
+              <p><%= f.link_to_add ('<i class="fa fa-plus"></i>').html_safe, :photos %></p>
+            </div>
 
             <%= f.submit "Continuer", class: "btn btn-primary" %>
           </div>

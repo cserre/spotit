@@ -21,4 +21,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def booked_spot?(spot)
+    has_spot = false
+
+    self.bookings.each do |booking|
+      booking.spot == spot ? has_spot = true : nil
+    end
+
+    return has_spot
+  end
 end

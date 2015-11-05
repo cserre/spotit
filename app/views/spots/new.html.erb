@@ -15,5 +15,14 @@
       var total_price = area * 50;
       $("#estimated_earning").text(total_price + ' €');
     })
+
+    <!-- limit the number of pictures -->
+    $('#pics').click(function(){
+      if ($('#pics .fields').length == 2) {
+        $('#pics>p>a').hide();
+      } else {
+        $('#pics>p>a').show();
+      }
+    })
   <% end %>
 <% end %>

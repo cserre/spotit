@@ -2,6 +2,7 @@ class SpotsController < ApplicationController
 
   before_action :set_spot, only: [:show, :edit, :update]
   before_action :set_params, only: [:index, :new]
+  before_filter :store_location
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:index, :show]
 
@@ -11,7 +12,8 @@ class SpotsController < ApplicationController
     @spots_selected = Spot.all.where(visible: true)
 
     if !(@params["city"].nil? || @params["city"] == "")
-      @spots_selected = @spots_selected.where("city = ?", @params["city"].capitalize)
+      # @spots_selected = @spots_selected.where("city = ?", @params["city"].capitalize)
+      @spots_selected = @spots_selected.near(@params["city"])
     end
     if !(@params["price"].nil? || @params["price"] == "")
       @spots_selected = @spots_selected.where("price <= ?", @params["price"].to_i)

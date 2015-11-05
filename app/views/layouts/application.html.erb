@@ -14,7 +14,9 @@
       <%= content_for :nav %>
     <% else %>
       <%= render '/shared/navbar' %>
-      <%= render '/shared/flashes' %>
+      <div id="flash">
+        <%= render '/shared/flashes' %>
+      </div>
     <% end %>
 
 
@@ -25,5 +27,14 @@
     <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
     <%= yield(:after_js) %>
+
+    <%= javascript_tag do %>
+      $(document).ready(function(){
+        setTimeout(function(){
+          $('#flash').fadeOut('slow');
+        }, 2000);
+       })
+     <% end %>
+
   </body>
 </html>

@@ -58,7 +58,7 @@
   <!-- show all spots according to filters -->
   <div class="row">
     <div class="col-xs-12" style="padding-top: 30px;">
-      <p><%= @spots_total_number %> results in <%= @params["city"].capitalize %> :</p>
+      <p><%= @spots_total_number %> results in <%= (@params["city"].nil? || @params["city"] == "") ? "the whole world" : @params["city"].capitalize %> :</p>
     </div>
 
     <% @spots_selected.each do |spot| %>
