@@ -66,7 +66,7 @@
 
         <!--  calculating the total price for the booking-->
           var total_price = Math.round(
-          <%= @spot.price %> * (end_date-start_date + 1) / (1000*60*60*24));
+          <%= @spot.price %> * ((end_date-start_date / (1000*60*60*24))+1);
 
         <!--  Setting the total price for the booking-->
           $("#total_price").val(total_price);
