@@ -21,6 +21,8 @@ gem 'autoprefixer-rails'
 gem "geocoder"
 gem "gmaps4rails"
 
+
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-slick.js'
   gem 'rails-assets-lightbox'
@@ -28,6 +30,8 @@ source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
 
+# Gems pour le date picker
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'binding_of_caller'

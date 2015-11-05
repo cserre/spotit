@@ -2,7 +2,7 @@ class SpotsController < ApplicationController
 
   before_action :set_spot, only: [:show, :edit, :update]
   before_action :set_params, only: [:index, :new]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
