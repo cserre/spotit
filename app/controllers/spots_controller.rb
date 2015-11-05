@@ -34,8 +34,12 @@ class SpotsController < ApplicationController
     @spots_selected = @spots_selected.page params[:page]
 
     @markers = Gmaps4rails.build_markers(@spots_selected) do |spot, marker|
+      @my_spot = spot
       marker.lat spot.latitude
       marker.lng spot.longitude
+      # marker.infowindow render_to_string(:partial => "/spots/infowindow")
+      marker.infowindow render_to_string(:partial => 'spots/infowindow', :locals => { :object => @my_spot})
+
       # marker.picture({
       #   :url => ActionController::Base.helpers.asset_path('marker.png'),#{ }"http://placehold.it/30x30",
       #   :width   => 28,
@@ -50,11 +54,17 @@ class SpotsController < ApplicationController
   def new
     @spot = Spot.new
     @spot.price = @params["area"].to_i * 4
+    # 2.times { @spot.photos.build }
   end
 
   def create
     @params = spot_params
     @spot = Spot.new(spot_params)
+    # raise
+    @spot.photos.build
+    # @spot.photos.each { |photo| photo.build }
+    # @spot.build_photo
+
     if @spot.save
       redirect_to spot_path(@spot)
     else
@@ -85,6 +95,6 @@ class SpotsController < ApplicationController
   def spot_params
     params.require(:spot).permit(:title, :street, :description, :price, :user_id,
       :visible, :city, :style, :post_code, :area, :exposition, :exceptional_view,
-      :modular_furniture)
+      :modular_furniture, photos_attributes: [:id, :picture, :_destroy])
   end
 end
