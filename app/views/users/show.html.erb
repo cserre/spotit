@@ -1,0 +1,51 @@
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation" class="active"><%=link_to "Profil", edit_user_registration_path(@user) %>
+</li>
+  <li role="presentation"><%=link_to "Review", "#"  %></li>
+  <li role="presentation"><%=link_to "Messages", "#"  %></li>
+</ul>
+<div class="background-grey">
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-2">
+      <div class="mg-picture">
+        <%= image_tag current_user.picture %>
+      </div>
+    </div>
+    <div class="col-md-6 ">
+      <div class="mg-welcome-profile">
+        <h1>Bonjour, je m'appelle <%= @user.first_name %></h1>
+        <p>Membre depuis <%= @user.created_at.strftime('%B %Y') %></p>
+        <%=link_to "Modifier le Profil", edit_user_registration_path(@user) %>
+        <h2 class="mg-spots">My spots:</h2>
+          <div class="row">
+            <div class="col-xs-12" style="padding-top: 30px;">
+              <% if @user.spots.empty? %>
+                <p><%= "You have no spot yet" %></p>
+                <% else %>
+                <% @user.spots.each do |spot| %>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <span class="card-bg" style="background-image: url(<%= image_path 'loft1.png' %>)"></span>
+                      <span class="card-gradient"></span>
+                      <span class="card-price">
+                        <%= spot.price.to_i.to_s + ' €/day' %>
+                      </span>
+                      <span class="card-text">
+                        <h3><%= spot.title %></h3>
+                      </span>
+                      <%= link_to "", spot_path(spot),class: 'card-link' %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
