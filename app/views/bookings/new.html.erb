@@ -1,6 +1,6 @@
 
 <div class="title-new text-center">
-  <p> <strong>Thank you for booking throught Spot it, we love you.</strong></p>
+  <h2>Thank you for booking throught Spot it, we love you.</h2>
   <p>Please confirm your booking</p>
 </div>
 
@@ -8,7 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="title-new text-center">
-        <h2> <strong><%= @spot.title %></strong></h2>
+        <h2> <%= @spot.title %></h2>
       </div>
     </div>
     <div class="row">
@@ -32,8 +32,10 @@
           <%= simple_form_for([ @spot, @booking ]) do |f| %>
             <%= f.input :start_time, as: :string, input_html: {class: "datepicker", value: @params["start_time"]}%>
             <%= f.input :end_time, as: :string, input_html: {class: "datepicker", value: @params["end_time"] } %>
-            <%= f.hidden_field :total_price, input_html: { value: @params["total_price"] } %>
-            <%= f.submit "Confirm your booking", class: "btn btn-primary"   %>
+            <%= f.hidden_field :total_price, value: @params["total_price"] %>
+             <%= f.hidden_field :spot_id, value: @spot.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.submit "Confirm your booking", class: "btn btn-primary" %>
           <% end %>
 
         </div>
@@ -51,9 +53,12 @@
           });
         });
       </script>
+      <% end %>
+
+      <% content_for(:after_js) do %>
 
         <% javascript_tag do %>
-          $('.form-group').on('change', function() {
+          $('.simple_form').on('change', function() {
 
          <!--  getting all the variables from the form -->
             var start_date = new Date( $('#start_time').val());
@@ -68,6 +73,17 @@
 
         <!--  Displaying to the view the total price for the booking-->
           $("#tt_price").text('your price would be of ' + total_price + ' €');
+          })
+        <% end %>
+      <% end %>
+
+      <% content_for(:after_js) do %>
+
+        <% javascript_tag do %>
+          $('.btn').on('click', function() {
+
+        <!--  Displaying the modal-->
+
           })
         <% end %>
       <% end %>
