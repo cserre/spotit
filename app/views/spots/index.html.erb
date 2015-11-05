@@ -116,6 +116,16 @@
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       });
+
+      <!-- infowindow on mouseover -->
+      google.maps.event.addListener(marker, 'mouseover', function() {
+          infowindow.open(map, this);
+      });
+
+      // assuming you also want to hide the infowindow when user mouses-out
+      google.maps.event.addListener(marker, 'mouseout', function() {
+          infowindow.close();
+      });
     });
   <% end %>
 <% end %>

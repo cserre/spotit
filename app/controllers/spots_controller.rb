@@ -34,8 +34,12 @@ class SpotsController < ApplicationController
     @spots_selected = @spots_selected.page params[:page]
 
     @markers = Gmaps4rails.build_markers(@spots_selected) do |spot, marker|
+      @my_spot = spot
       marker.lat spot.latitude
       marker.lng spot.longitude
+      # marker.infowindow render_to_string(:partial => "/spots/infowindow")
+      marker.infowindow render_to_string(:partial => 'spots/infowindow', :locals => { :object => @my_spot})
+
       # marker.picture({
       #   :url => ActionController::Base.helpers.asset_path('marker.png'),#{ }"http://placehold.it/30x30",
       #   :width   => 28,
