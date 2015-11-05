@@ -57,6 +57,7 @@ class SpotsController < ApplicationController
   end
 
   def show
+    @owner = User.find(@spot.user_id)
   end
 
   def new
