@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO</title>
+    <title>Spot it - find the perfect place for your shootings</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <% if content_for? :nav %>
       <%= content_for :nav %>
     <% else %>
       <%= render '/shared/navbar' %>
+      <%= render '/shared/flashes' %>
     <% end %>
 
-<!--     <%= render '/shared/flashes' %>
- -->    <%= yield %>
+
+    <%= yield %>
     <%= javascript_include_tag 'application' %>
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBlxWUuL1MjpZemwlaO31HpxNkLUUsJHIQ"></script>

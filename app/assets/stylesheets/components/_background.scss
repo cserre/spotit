@@ -10,12 +10,7 @@
 }
 
 .background-grey {
-  margin:0;
-  height: 100vh;
+  left: 0px;
+  right: 0px;
   background-color: #F5F5F5;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
-  background-position: center center;
-  opacity: 0.75;
-  z-index: 2 ;
 }
