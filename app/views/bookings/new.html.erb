@@ -16,17 +16,11 @@
         <div class="margin-form">
             <p><strong>the spot you want to book : </strong></p>
             <ul>
-               <% @spot.description.nil? ? nil : %>
-               <li> <%=@spot.description %> </li>
-                <% @spot.description.nil? ? nil : %>
+              <li> <%=@spot.description %> </li>
               <li> <%= @spot.street %> </li>
-               <% @spot.street.nil? ? nil : %>
               <li> <%= @spot.post_code %> </li>
-               <% @spot.city.nil? ? nil : %>
               <li> <%= @spot.city %> </li>
-               <% @spot.area.nil? ? nil : %>
               <li> <%= @spot.area %> </li>
-               <% @spot.style.nil? ? nil : %>
               <li> <%= @spot.style %> </li>
             </ul>
         </div>

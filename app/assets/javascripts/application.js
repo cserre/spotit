@@ -7,4 +7,5 @@
 //= require underscore
 //= require gmaps/google
 //= require bootstrap-datepicker
+//= require jquery_nested_form
 //= require_tree .

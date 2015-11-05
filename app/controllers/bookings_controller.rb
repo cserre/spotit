@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_spot, only: [:new, :create,:show, :edit, :update]
   before_action :set_booking, only: [:show, :edit, :update, :delete]
   before_action :set_params, only: [:index, :new]
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
 
   def show
