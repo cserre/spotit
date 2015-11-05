@@ -14,7 +14,7 @@
       <%= content_for :nav %>
     <% else %>
       <%= render '/shared/navbar' %>
-      <div id="flash">
+      <div id="flash" style="z-index: 10;">
         <%= render '/shared/flashes' %>
       </div>
     <% end %>
