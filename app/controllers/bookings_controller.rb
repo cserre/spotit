@@ -14,13 +14,15 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(spot_params)
+
+    @params = booking_params
+    @booking = Booking.new(booking_params)
     @booking.spot = @spot
     # @booking.total_price = @spot.price *(@booking.start_time-@booking.end_time)
     if @booking.save
-      render :show
-    else
       redirect_to spot_path(@spot)
+    else
+      render :new
     end
   end
 
@@ -50,7 +52,7 @@ class BookingsController < ApplicationController
     @booking = @spot.booking.find(id)
   end
 
-  def spot_params
+  def booking_params
     params.require(:booking).permit(:start_time, :end_time, :spot_id, :user_id, :total_price)
   end
 
