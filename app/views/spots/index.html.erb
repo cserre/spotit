@@ -1,20 +1,3 @@
-<!-- set max and min price, max and min area for the city selected -->
-<% prices = [] %>
-<% areas = [] %>
-<% @spots.each do |spot| %>
-  <% if spot.visible && ((@params["city"].nil? || @params["city"] == "") ? true : spot.city.downcase == @params["city"].downcase) %>
-    <% prices << spot.price %>
-    <% areas << spot.area %>
-  <% end %>
-<% end %>
-<% max_price = prices.sort.last.to_i %>
-<% min_price = prices.sort.first.to_i %>
-<% max_area = areas.sort.last.to_i %>
-<% min_area = areas.sort.first.to_i %>
-
-<!-- find all spots macthing criteria -->
-
-
 <div class="sidebar sidebar-padded">
   <!-- form to add specific filters and refresh this page -->
   <div class="row">
@@ -24,11 +7,11 @@
           <div class="col-sm-7">
             <div class="form-group">
               <%= label_tag :price, "Max price:" %>
-              <%= text_field_tag :price, nil, class: 'slider-price span2', data: { :"slider-id" => 'slider-price', :"slider-min" => min_price, :"slider-max" => max_price, :"slider-step" => 100, :"slider-value" => max_price } %>
+              <%= text_field_tag :price, nil, class: 'slider-price span2', data: { :"slider-id" => 'slider-price', :"slider-min" => @min_price, :"slider-max" => @max_price, :"slider-step" => 100, :"slider-value" => @max_price } %>
             </div>
             <div class="form-group">
               <%= label_tag :area, "Min area:" %>
-              <%= text_field_tag :area, nil, class: 'slider-area span2', data: { :"slider-id" => 'slider-area', :"slider-min" => min_area, :"slider-max" => max_area, :"slider-step" => 1, :"slider-value" => min_area, :"slider-selection" => "after"} %>
+              <%= text_field_tag :area, nil, class: 'slider-area span2', data: { :"slider-id" => 'slider-area', :"slider-min" => @min_area, :"slider-max" => @max_area, :"slider-step" => 1, :"slider-value" => @min_area, :"slider-selection" => "after"} %>
             </div>
             <div class="form-group form-inline">
               <!-- <%= label_tag :city, "City:" %> -->
@@ -58,7 +41,7 @@
   <!-- show all spots according to filters -->
   <div class="row">
     <div class="col-xs-12" style="padding-top: 30px;">
-      <p><%= @spots_total_number %> results in <%= @params["city"].capitalize %> :</p>
+      <p><%= @spots_total_number %> results in <%= (@params["city"].nil? || @params["city"] == "") ? "the whole world" : @params["city"].capitalize %> :</p>
     </div>
 
     <% @spots_selected.each do |spot| %>

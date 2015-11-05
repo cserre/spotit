@@ -46,7 +46,14 @@
 
 <% content_for(:after_js) do %>
   <% javascript_tag do %>
+    <!-- update price on key press  -->
     $('#area').on('keyup', function() {
+      var area = $(this).val();
+      var total_price = area * 4;
+      $("#estimated_earning").text(total_price + ' €');
+    })
+    <!-- update price on click -->
+    $('#area').on('click', function() {
       var area = $(this).val();
       var total_price = area * 4;
       $("#estimated_earning").text(total_price + ' €');
