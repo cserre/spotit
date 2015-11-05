@@ -5,11 +5,11 @@
   <div class="bg-gradient flex">
     <div class="form-group">
       <%= form_tag('/spots', method: 'get', :class => "form-inline") do %>
-         <div class="title-home text-right"><span class="box-home"><%= select_tag :city, options_for_select(%w( PARIS LYON BORDEAUX )) %></span> <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" style="font-size: 35px;"></span> EST VOTRE STUDIO</div>
+         <div class="title-home"><span class="box-home"><%= select_tag :city, options_for_select(%w( PARIS LYON BORDEAUX )) %></span> <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" style="font-size: 35px;"></span> EST VOTRE STUDIO</div>
+         <span id="hiddenDiv" class="title-home" style="visibility:hidden; line-height:0;"></span>
          <div class="text-center">
           <%= submit_tag "Find your perfect place", class: 'btn btn-primary btn-home' %></div>
       <% end %>
-      <span id="hiddenDiv" class="title-home" style="visibility:hidden"></span>
     </div>
   </div>
 </div>
