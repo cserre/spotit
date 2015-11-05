@@ -50,11 +50,17 @@ class SpotsController < ApplicationController
   def new
     @spot = Spot.new
     @spot.price = @params["area"].to_i * 4
+    # 2.times { @spot.photos.build }
   end
 
   def create
     @params = spot_params
     @spot = Spot.new(spot_params)
+    # raise
+    @spot.photos.build
+    # @spot.photos.each { |photo| photo.build }
+    # @spot.build_photo
+
     if @spot.save
       redirect_to spot_path(@spot)
     else
@@ -85,6 +91,6 @@ class SpotsController < ApplicationController
   def spot_params
     params.require(:spot).permit(:title, :street, :description, :price, :user_id,
       :visible, :city, :style, :post_code, :area, :exposition, :exceptional_view,
-      :modular_furniture)
+      :modular_furniture, photos_attributes: [:id, :picture, :_destroy])
   end
 end

@@ -64,7 +64,7 @@
     <% @spots_selected.each do |spot| %>
       <div class="col-md-6">
         <div class="card">
-          <span class="card-bg" style="background-image: url(<%= image_path 'loft1.png' %>)"></span>
+          <span class="card-bg" style="background-image: url(<%= image_path spot.photos.first.picture.url(:medium) %>)"></span>
           <span class="card-gradient"></span>
           <!-- <span class="card-rating">
 

@@ -1,6 +1,8 @@
 class Spot < ActiveRecord::Base
   alias_attribute :user, :owner
   belongs_to  :user
+  has_many :photos
+  accepts_nested_attributes_for :photos, reject_if: lambda {|attributes| attributes['picture'].blank?}, :allow_destroy => true
 
   validates :title, presence: true
   validates :description, presence: true

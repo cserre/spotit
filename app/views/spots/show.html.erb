@@ -1,14 +1,30 @@
 <!-- displayong the lightbox and the bagroung image -->
 
-<div class="banner text-center" style="background-image: url(<%= image_path 'loft1.png' %>)">
+<!-- <div class="banner text-center" style="background-image: url(<%= image_path @spot.photos.first.picture.url(:large) %>);">>
   <div class="banner-content">
+
     <a href= <%= image_path 'loft2.png' %> data-lightbox="roadtrip">
       <p>View more</p>
     </a>
     <a href=<%= image_path 'loft3.png' %> data-lightbox="roadtrip"></a>
     <a href=<%= image_path 'loft1.png' %> data-lightbox="roadtrip"></a>
   </div>
+</div> -->
+
+
+<div class="banner">
+  <span class="banner-bg" style="background-image: url(<%= image_path @spot.photos.first.picture.url(:large) %>); backgroun-position: center center;"></span>
+  <span class="banner-gradient"></span>
+  <a href=<%= image_path @spot.photos.first.picture.url(:large) %> class='banner-link' data-lightbox="roadtrip"></a>
+
+  <% @spot.photos.each do |photo| %>
+    <% if photo.id != @spot.photos.first.id && photo.picture_file_name %>
+      <a href=<%= image_path photo.picture.url(:large) %> data-lightbox="roadtrip"></a>
+    <% end %>
+  <% end %>
+
 </div>
+
 
 
 <div class="container">
