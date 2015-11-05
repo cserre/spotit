@@ -1,9 +1,9 @@
 class SpotsController < ApplicationController
 
   before_action :set_spot, only: [:show, :edit, :update]
-  before_action :set_params, only: [:index]
+  before_action :set_params, only: [:index, :new]
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:index, :show, :new]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @spots = Spot.all
@@ -49,25 +49,20 @@ class SpotsController < ApplicationController
 
   def new
     @spot = Spot.new
+    @spot.price = @params["area"].to_i * 4
   end
 
   def create
+    @params = spot_params
     @spot = Spot.new(spot_params)
     if @spot.save
-      redirect_to edit_spot_path(@spot)
+      redirect_to spot_path(@spot)
     else
       render :new
     end
   end
 
   def edit
-    @spot.street = ""
-    @spot.post_code = ""
-    @spot.street = ""
-    @spot.style = ""
-    @spot.description = ""
-    @spot.exposition = ""
-    @spot.price = @spot.area * 4
   end
 
   def update

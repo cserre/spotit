@@ -3,4 +3,6 @@ class PagesController < ApplicationController
     @spot = Spot.new
     @spots = Spot.all
   end
+  def add
+  end
 end

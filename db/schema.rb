@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104204822) do
+ActiveRecord::Schema.define(version: 20151104111041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,21 +30,21 @@ ActiveRecord::Schema.define(version: 20151104204822) do
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "spots", force: :cascade do |t|
-    t.string   "title",             default: "default"
-    t.string   "street",            default: "default"
-    t.text     "description",       default: "default"
-    t.integer  "price",             default: 0
-    t.integer  "user_id",           default: 1
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "title"
+    t.string   "street"
+    t.text     "description"
+    t.float    "price"
+    t.integer  "user_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.boolean  "visible",           default: false
     t.string   "city"
-    t.string   "style",             default: "default"
-    t.string   "post_code",         default: "00000"
+    t.string   "style"
+    t.integer  "post_code"
     t.integer  "area"
-    t.string   "exposition",        default: "default"
-    t.boolean  "exceptional_view",  default: false
-    t.boolean  "modular_furniture", default: false
+    t.string   "exposition"
+    t.boolean  "exceptional_view"
+    t.boolean  "modular_furniture"
     t.float    "latitude"
     t.float    "longitude"
   end

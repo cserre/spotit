@@ -1,0 +1,32 @@
+<div class="background-grey">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="margin-form">
+
+          <%= simple_form_for @spot do  |f| %>
+            <%= f.input :title %>
+            <%= f.input :description %>
+            <%= f.input :street %>
+            <%= f.input :post_code %>
+            <%= f.input :city, input_html: { value: @params.nil? ? @spot.city : @params["city"] } %>
+            <%= f.input :area, input_html: { value: @params.nil? ? @spot.area : @params["area"]  } %>
+            <%= f.input :style, collection: %w( chic rustique industriel cosy ) %>
+        </div>
+      </div>
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="margin-form">
+
+            <%= f.input :exposition %>
+            <%= f.input :exceptional_view %>
+            <%= f.input :modular_furniture %>
+            <%= f.input :price, label: 'Price per day' %>
+            <%= f.hidden_field :visible, value: 'true' %>
+
+            <%= f.submit "Continuer", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

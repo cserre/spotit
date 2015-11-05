@@ -1,50 +1,6 @@
-<% if !(@spot.visible) %>
-  <div class="title-new text-center">
-    <h2>Finalisez votre annonce pour la publier</h2>
-    <p>Spotit vous permet de gagner de l'argent en louant votre logement</p>
-  </div>
-<% end %>
-
-<div class="background-grey">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
-        <div class="margin-form">
-
-          <%= simple_form_for @spot do  |f| %>
-
-            <%= f.input :street %>
-            <%= f.input :post_code %>
-            <%= f.input :city, value: @spot.city %>
-            <%= f.input :area, value: @spot.area %>
-            <%= f.input :style, collection: %w( chic rustique industriel cosy ) %>
-            <%= f.input :description %>
-        </div>
-      </div>
-      <div class="col-sm-5 col-sm-offset-1">
-        <div class="margin-form">
-
-            <%= f.input :exposition %>
-            <%= f.input :exceptional_view %>
-            <%= f.input :modular_furniture %>
-            <%= f.input :price, label: 'Advised price per day' %>
-            <%= f.hidden_field :visible, value: 'true' %>
-
-            <%= f.submit "Continuer", class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="title-new text-center">
+  <h2>Update your ad</h2>
+  <p>Feel free to update your ad information or add photos</p>
 </div>
 
-
-<% content_for(:after_js) do %>
-  <% javascript_tag do %>
-    $('#spot_area').on('keyup', function() {
-      var area = $(this).val();
-      var total_price = area * 50;
-      $("#estimated_earning").text(total_price + ' €');
-    })
-  <% end %>
-<% end %>
+<%= render 'form' %>

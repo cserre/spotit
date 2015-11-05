@@ -14,10 +14,11 @@
       <%= content_for :nav %>
     <% else %>
       <%= render '/shared/navbar' %>
+      <%= render '/shared/flashes' %>
     <% end %>
 
-<!--     <%= render '/shared/flashes' %>
- -->    <%= yield %>
+
+    <%= yield %>
     <%= javascript_include_tag 'application' %>
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBlxWUuL1MjpZemwlaO31HpxNkLUUsJHIQ"></script>
