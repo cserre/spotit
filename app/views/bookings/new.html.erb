@@ -1,0 +1,80 @@
+
+<div class="title-new text-center">
+  <p> <strong>Thank you for booking throught Spot it, we love you.</strong></p>
+  <p>Please confirm your booking</p>
+</div>
+
+<div class="background-grey">
+  <div class="container">
+    <div class="row">
+      <div class="title-new text-center">
+        <h2> <strong><%= @spot.title %></strong></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="margin-form">
+            <p><strong>the spot you want to book : </strong></p>
+            <ul>
+              <li> <%=@spot.description %> </li>
+              <li> <%= @spot.street %> </li>
+              <li> <%= @spot.post_code %> </li>
+              <li> <%= @spot.city %> </li>
+              <li> <%= @spot.area %> </li>
+              <li> <%= @spot.style %> </li>
+            </ul>
+        </div>
+      </div>
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="margin-form">
+          <p id="tt_price" class="card-margin  "> <strong>Your booking is of <%= @params["total_price"] %> € </strong> </p>
+          <p id="tt_price" class="card-margin  "> The date you have chosen : </p>
+          <%= simple_form_for([ @spot, @booking ]) do |f| %>
+            <%= f.input :start_time, as: :string, input_html: {class: "datepicker", value: @params["start_time"]}%>
+            <%= f.input :end_time, as: :string, input_html: {class: "datepicker", value: @params["end_time"] } %>
+            <%= f.hidden_field :total_price, input_html: { value: @params["total_price"] } %>
+            <%= f.submit "Confirm your booking", class: "btn btn-primary"   %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <% content_for(:after_js) do %>
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+        $('.datepicker').datepicker({
+              startDate: 'd'
+          });
+        });
+      </script>
+
+        <% javascript_tag do %>
+          $('.form-group').on('change', function() {
+
+         <!--  getting all the variables from the form -->
+            var start_date = new Date( $('#start_time').val());
+            var end_date = new Date($('#end_time').val());
+
+        <!--  calculating the total price for the booking-->
+          var total_price = Math.round(
+          <%= @spot.price %> * (end_date-start_date + 1) / (1000*60*60*24));
+
+        <!--  Setting the total price for the booking-->
+          $("#total_price").val(total_price);
+
+        <!--  Displaying to the view the total price for the booking-->
+          $("#tt_price").text('your price would be of ' + total_price + ' €');
+          })
+        <% end %>
+      <% end %>
+
+<!-- Creating the form for the bookings  -->
+
+
+
+
+

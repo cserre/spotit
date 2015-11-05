@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_spot, only: [:new, :create,:show, :edit, :update]
   before_action :set_booking, only: [:show, :edit, :update, :delete]
+  before_action :set_params, only: [:index, :new]
   before_action :authenticate_user!
 
 
@@ -41,6 +42,9 @@ class BookingsController < ApplicationController
     @spot = Spot.find(id)
   end
 
+  def set_params
+    @params = params
+  end
   def set_booking
     id = params[:id]
     @booking = @spot.booking.find(id)
