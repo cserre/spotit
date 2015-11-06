@@ -13,6 +13,10 @@
               <%= label_tag :area, "Min area:" %>
               <%= text_field_tag :area, nil, class: 'slider-area span2', data: { :"slider-id" => 'slider-area', :"slider-min" => @min_area, :"slider-max" => @max_area, :"slider-step" => 1, :"slider-value" => @min_area, :"slider-selection" => "after"} %>
             </div>
+            <div class="form-group">
+              <%= label_tag :rating, "Min rating:" %>
+              <%= text_field_tag :rating, nil, class: 'slider-rating span2', data: { :"slider-id" => 'slider-rating', :"slider-min" => 0, :"slider-max" => @max_rating, :"slider-step" => 1, :"slider-value" => @max_rating } %>
+            </div>
             <div class="form-group form-inline">
               <!-- <%= label_tag :city, "City:" %> -->
               <%= hidden_field_tag :city, @params["city"], class: 'form-control' %>
@@ -49,10 +53,10 @@
         <div class="card">
           <span class="card-bg" style="background-image: url(<%= image_path spot.photos.first.picture.url(:medium) %>)"></span>
           <span class="card-gradient"></span>
-          <!-- <span class="card-rating">
+          <span class="card-rating">
 
-            <%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * 4).html_safe %>
-          </span> -->
+            <%= ("<i class='fa fa-star' style='color: #469AE0;'></i>" * spot.rating).html_safe %><%= ("<i class='fa fa-star' style='color: white;'></i>" * (5 - spot.rating)).html_safe %>
+          </span>
           <span class="card-price">
             <%= spot.price.to_i.to_s + ' €/day' %>
           </span>
@@ -78,6 +82,7 @@
   <%= javascript_tag do %>
     var sliderPrice = $('.slider-price').slider();
     var sliderArea = $('.slider-area').slider();
+    var sliderRating = $('.slider-rating').slider();
     <% if @params["price"].to_i > 0 %>
       var valuePrice = <%= @params["price"].to_i %>;
       sliderPrice.slider('setValue', valuePrice);
@@ -85,6 +90,10 @@
     <% if @params["area"].to_i > 0 %>
       var valueArea = <%= @params["area"].to_i %>;
       sliderArea.slider('setValue', valueArea);
+    <% end %>
+    <% if @params["rating"].to_i > 0 %>
+      var valueArea = <%= @params["rating"].to_i %>;
+      sliderRating.slider('setValue', valueRating);
     <% end %>
   <% end %>
   <!-- script for map -->

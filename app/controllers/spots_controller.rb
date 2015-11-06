@@ -21,6 +21,11 @@ class SpotsController < ApplicationController
     @max_area = @spots_selected.maximum('area')
     @min_area = @spots_selected.minimum('area')
 
+    @max_rating = 0
+    @spots_selected.each do |spot|
+      @max_rating = spot.rating > @max_rating ? spot.rating : @max_rating
+    end
+
     if !(@params["price"].nil? || @params["price"] == "")
       @spots_selected = @spots_selected.where("price <= ?", @params["price"].to_i)
     end
@@ -30,6 +35,11 @@ class SpotsController < ApplicationController
     if !(@params["area"].nil? || @params["area"] == "")
       @spots_selected = @spots_selected.where("area >= ?", @params["area"].to_i)
     end
+
+    # if !(@params["rating"].nil? || @params["rating"] == "")
+    #   @spots_selected = @spots_selected.where(spot.rating > @params["rating"].to_i)
+    # end
+
     if !(@params["exceptional_view"].nil? || @params["exceptional_view"] == "") \
       && @params["exceptional_view"] == "on"
       @spots_selected = @spots_selected.where("exceptional_view = ?", true)
@@ -57,6 +67,8 @@ class SpotsController < ApplicationController
   end
 
   def show
+    @owner = User.find(@spot.user_id)
+    @spot_review = SpotReview.new
   end
 
   def new
@@ -90,7 +102,6 @@ class SpotsController < ApplicationController
       render :edit
     end
   end
-
 
   private
   def set_spot
