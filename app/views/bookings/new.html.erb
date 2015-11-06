@@ -14,15 +14,24 @@
     <div class="row">
       <div class="col-sm-5 col-sm-offset-1">
         <div class="margin-form">
-            <p><strong>the spot you want to book : </strong></p>
-            <ul>
-              <li> <%=@spot.description %> </li>
-              <li> <%= @spot.street %> </li>
-              <li> <%= @spot.post_code %> </li>
-              <li> <%= @spot.city %> </li>
-              <li> <%= @spot.area %> </li>
-              <li> <%= @spot.style %> </li>
-            </ul>
+          <p><strong>The spot you want to book : </strong></p>
+          <div class="card">
+            <span class="card-bg" style="background-image: url(<%= image_path @spot.photos.first.picture.url(:medium) %>)"></span>
+            <span class="card-gradient"></span>
+              <%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * 4).html_safe %>
+            </span> -->
+            <span class="card-price">
+              <%= @spot.price.to_i.to_s + ' €/day' %>
+            </span>
+          </div>
+          <ul>
+            <li> <%=@spot.description %> </li>
+            <li> <%= @spot.street %> </li>
+            <li> <%= @spot.post_code %> </li>
+            <li> <%= @spot.city %> </li>
+            <li> <%= @spot.area %> </li>
+            <li> <%= @spot.style %> </li>
+          </ul>
         </div>
       </div>
       <div class="col-sm-5 col-sm-offset-1">
