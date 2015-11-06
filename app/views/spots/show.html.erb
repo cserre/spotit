@@ -25,7 +25,7 @@
 
           <!-- displaying the address -->
           <address style="margin-bottom: 10px;">
-            <strong><%= @spot.city %></strong>, <%= @spot.address %>, <%= @spot.post_code %><br>
+            <%= @spot.address %>
           </address>
           <p><%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * @spot.rating).html_safe %><%= ("<i class='fa fa-star' style='color: #eee;'></i>" * (5 - @spot.rating)).html_safe %></p>
         </div>

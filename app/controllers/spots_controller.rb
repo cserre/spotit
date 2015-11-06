@@ -9,7 +9,7 @@ class SpotsController < ApplicationController
   def index
     @spots = Spot.all
 
-    @spots_selected = Spot.all.where(visible: true)
+    @spots_selected = Spot.where(visible: true)
 
     if !(@params["city"].nil? || @params["city"] == "")
       # @spots_selected = @spots_selected.where("city = ?", @params["city"].capitalize)
@@ -46,18 +46,12 @@ class SpotsController < ApplicationController
       @spots_selected = @spots_selected.where("exposition = ?", true)
     end
 
-    if !(@params["rating"].nil? || @params["rating"] == "")
-      spot_tem = []
-      @spots_selected.each do |spot|
-        spot_tem << spot if (spot.rating >= @params["rating"].to_i || (spot.rating == 0 && spot.spot_reviews.size == 0))
-      end
-      @spots_selected = spot_tem
+    if @params["rating"].present?
+      @spots_selected = @spots_selected.joins(:spot_reviews).group('spots.id').having('AVG(spot_reviews.rating) >= ?', @params["rating"])
     end
 
     @spots_total_number = @spots_selected.length
-    # @spots_selected = @spots_selected.page params[:page]
-    @spots_selected = Kaminari.paginate_array(@spots_selected).page(params[:page])
-
+    @spots_selected = @spots_selected.page params[:page]
 
     @markers = Gmaps4rails.build_markers(@spots_selected) do |spot, marker|
       @my_spot = spot

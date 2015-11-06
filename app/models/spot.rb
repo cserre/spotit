@@ -13,6 +13,7 @@ class Spot < ActiveRecord::Base
   validates :area, presence: true
   validates :street, presence: true
   validates :style, presence: true
+  validates :address, presence: true
   validates :post_code, presence: true, format: { with: /\A\d{5}\z/, message: "this is not a post code" }
   validates :exposition, presence: true
   validate :has_photo
@@ -24,22 +25,12 @@ class Spot < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, if: :street_changed? || :post_code_changed? || :city_changed?
 
-  def address
-    [street, post_code, city].compact.join(', ')
-  end
+  # def address
+  #   [street, post_code, city].compact.join(', ')
+  # end
 
   def rating
-    nb_ratings = 0
-    total = 0
-    self.spot_reviews.each do |review|
-      nb_ratings +=1
-      total += review.rating
-    end
-    if nb_ratings > 0
-      return (total / nb_ratings).round.to_i
-    else
-      return 0
-    end
+    spot_reviews.average(:rating) || 0
   end
 
   def has_photo

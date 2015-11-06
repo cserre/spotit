@@ -1,3 +1,4 @@
+
 <div class="background-grey">
   <div class="container">
     <div class="row">
@@ -6,9 +7,10 @@
           <div class="margin-form">
             <%= f.input :title %>
             <%= f.input :description %>
-            <%= f.input :street %>
-            <%= f.input :post_code %>
-            <%= f.input :city, input_html: { value: @params.nil? ? @spot.city : @params["city"] } %>
+            <%= f.input :address %>
+            <%= f.input :street, name: 'street-address' %>
+            <%= f.input :post_code, name: 'postal-code' %>
+            <%= f.input :city, input_html: { value: @params.nil? ? @spot.city : @params["city"] }, name: 'postal-code' %>
             <%= f.input :area, input_html: { value: @params.nil? ? @spot.area : @params["area"]  } %>
             <%= f.input :style, collection: %w( chic rustique industriel cosy ) %>
           </div>
