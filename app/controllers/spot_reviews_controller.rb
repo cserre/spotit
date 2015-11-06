@@ -1,12 +1,12 @@
 class SpotReviewsController < ApplicationController
 
-  before_action :set_spot, only: [:show, :edit, :update]
+  before_action :set_spot, only: [:show, :edit, :update, :create]
   before_action :set_params, only: [:index, :new]
   before_filter :store_location
   before_action :authenticate_user!
 
   def index
-    @all_reviews = Review.all
+    @all_reviews = SpotReview.all
     @spot_reviews = @all_reviews.where(spot_id: @spot.id)
   end
 
@@ -14,13 +14,13 @@ class SpotReviewsController < ApplicationController
   end
 
   def new
-    @review = Review.new
+    @spot_review = SpotReview.new
   end
 
   def create
-    @review = Review.new(review_params)
+    @spot_review = SpotReview.new(spot_review_params)
 
-    if @review.save
+    if @spot_review.save
       redirect_to spot_path(@spot)
     else
       render spot_path(@spot)
@@ -31,7 +31,7 @@ class SpotReviewsController < ApplicationController
   end
 
   def update
-    if @review.update(review_params)
+    if @spot_review.update(spot_review_params)
       redirect_to root_path
     else
       render :edit
@@ -47,8 +47,8 @@ class SpotReviewsController < ApplicationController
   def set_params
     @params = params
   end
-  def review_params
-    params.require(:review).permit(:rating, :comment, :user_id, :spot_id)
+  def spot_review_params
+    params.require(:spot_review).permit(:rating, :comment, :user_id, :spot_id)
   end
 
 end

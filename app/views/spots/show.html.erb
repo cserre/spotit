@@ -17,7 +17,7 @@
 
       <div class="row">
         <div class="col-sm-2 col-xs-hidden">
-          <%= image_tag @owner.picture, height: '70', class: 'img-circle', style: 'margin-top: 22px' %>
+          <%= image_tag @owner.imageUrl, height: '70', class: 'img-circle', style: 'margin-top: 22px' %>
         </div>
         <div class="col-sm-10">
           <!-- displaying the title -->
@@ -61,7 +61,35 @@
         <h3>Know more about this place</h3>
         <p><%= @spot.description %></p>
       </div>
+
+      <!-- commentaires -->
+      <div class="row">
+        <h3>All reviews</h3>
+        <% @spot.spot_reviews.each do |spot_review| %>
+          <div class="col-xs-12">
+            <div class="review">
+              <%= image_tag spot_review.user.imageUrl, height: '50', class: 'img-circle', style: '' %>
+              <%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * spot_review.rating).html_safe %><%= ("<i class='fa fa-star' style='color: #eee;'></i>" * (5 - spot_review.rating)).html_safe %> - <%= spot_review.created_at.strftime('%m/%d/%y') %>
+              <p style='margin-left: 50px;'><%= spot_review.comment %></p>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Add a review -->
+        <% if user_signed_in? %>
+          <% if current_user.booked_spot?(@spot) && !current_user.reviewed(@spot) %>
+            <div class="col-xs-12">
+              <button class="btn btn-primary" id="add-booking">Add a review</button>
+              <div>
+                <%= render 'spot_reviews/new' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
+
+
 
     <!-- displaying the "ask for bookings - it does not create a booking yet but redirect to the New booking with the good params" -->
     <div class="col-sm-4">
@@ -85,7 +113,7 @@
                 <h3 id="tt_price"><%= @spot.price.to_i %> €</h3>
               </div>
               <div class="text-center">
-                <%= submit_tag "Continue", class: 'btn btn-primary' %>
+                <%= submit_tag "Book", class: 'btn btn-primary' %>
               </div>
             <% end %>
           </div>
@@ -93,15 +121,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
 
-
-
-    <!-- commentaires -->
-
-
-
-  </div>
   <div class="row padded"></div>
 </div>
 

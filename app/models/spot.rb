@@ -2,6 +2,8 @@ class Spot < ActiveRecord::Base
   # alias_attribute :user, :owner
   belongs_to  :user
   has_many :photos
+  has_many :bookings
+  has_many :spot_reviews
   accepts_nested_attributes_for :photos, reject_if: lambda {|attributes| attributes['picture'].blank?}, :allow_destroy => true
 
   validates :title, presence: true, length: { maximum: 36, too_long: "limit to 36 characters" }

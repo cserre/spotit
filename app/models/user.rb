@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :bookings
   has_many :spots
+  has_many :spot_reviews, through: :spots
   devise :omniauthable, omniauth_providers: [:facebook]
 
   def self.find_for_facebook_oauth(auth)
@@ -25,9 +26,27 @@ class User < ActiveRecord::Base
     has_spot = false
 
     self.bookings.each do |booking|
-      booking.spot == spot ? has_spot = true : nil
+      booking.spot_id == spot.id ? has_spot = true : nil
     end
 
     return has_spot
+  end
+
+  def reviewed(spot)
+    has_reviewed = false
+    spot.spot_reviews.each do |review|
+      review.user == self ? has_reviewed = true : nil
+    end
+    return has_reviewed
+  end
+
+  def imageUrl
+    if self.picture.nil?
+      # ActionController::Base.helpers.asset_path('default_image.png')
+      "http://placehold.it/30x30"
+      #{ }"/assets/default_photo.jpg"
+    else
+      self.picture
+    end
   end
 end
