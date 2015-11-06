@@ -35,7 +35,9 @@
             <%= f.hidden_field :total_price, value: @params["total_price"] %>
              <%= f.hidden_field :spot_id, value: @spot.id %>
             <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.submit "Confirm your booking", class: "btn btn-primary" %>
+            <div data-toggle="modal" data-target="#myModal">
+            <%= f.submit "Confirm your booking", class: "btn btn-primary"%>
+            </div>
           <% end %>
 
         </div>
@@ -66,7 +68,7 @@
 
         <!--  calculating the total price for the booking-->
           var total_price = Math.round(
-          <%= @spot.price %> * ((end_date-start_date / (1000*60*60*24))+1);
+          <%= @spot.price %> * (((end_date-start_date) / (1000*60*60*24))+1));
 
         <!--  Setting the total price for the booking-->
           $("#total_price").val(total_price);
@@ -88,9 +90,21 @@
         <% end %>
       <% end %>
 
-<!-- Creating the form for the bookings  -->
 
-
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">Thank you</h2>
+      </div>
+      <div class="modal-body">
+        Thank you very much, your booking has been taken into account.
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
