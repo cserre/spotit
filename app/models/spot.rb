@@ -15,6 +15,9 @@ class Spot < ActiveRecord::Base
   validates :style, presence: true
   validates :post_code, presence: true, format: { with: /\A\d{5}\z/, message: "this is not a post code" }
   validates :exposition, presence: true
+  validate :has_photo
+  # validates :photos, presence: true
+  # validates_associated :photos
 
   paginates_per 20
 
@@ -37,6 +40,12 @@ class Spot < ActiveRecord::Base
     else
       return 0
     end
+  end
 
+  def has_photo
+    if photos.size == 1
+      errors.add(:base, 'must have one photo')
+    else
+    end
   end
 end
