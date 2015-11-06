@@ -66,7 +66,7 @@
       <!-- commentaires -->
       <div class="row">
         <h3>All reviews</h3>
-        <% if @spot.spot_reviews.nil? %>
+        <% if @spot.spot_reviews.blank? %>
           <p>No reviews yet.</p>
         <% end %>
         <% @spot.spot_reviews.each do |spot_review| %>
