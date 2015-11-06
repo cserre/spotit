@@ -1,6 +1,6 @@
 
 <div class="title-new text-center">
-  <h2>Thank you for booking throught Spot it, we love you.</h2>
+  <h2>Final step to book this great place</h2>
   <p>Please confirm your booking</p>
 </div>
 
@@ -12,31 +12,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
+      <div class="col-sm-6 col-sm-offset-3">
         <div class="margin-form">
-          <p><strong>The spot you want to book : </strong></p>
-          <div class="card">
-            <span class="card-bg" style="background-image: url(<%= image_path @spot.photos.first.picture.url(:medium) %>)"></span>
-            <span class="card-gradient"></span>
-              <%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * 4).html_safe %>
-            </span> -->
-            <span class="card-price">
-              <%= @spot.price.to_i.to_s + ' €/day' %>
-            </span>
+          <div class="price-bordered text-center">
+            <p id="tt_days">1 day<p>
+            <h3 id="tt_price"><%= @spot.price.to_i %> €</h3>
           </div>
-          <ul>
-            <li> <%=@spot.description %> </li>
-            <li> <%= @spot.street %> </li>
-            <li> <%= @spot.post_code %> </li>
-            <li> <%= @spot.city %> </li>
-            <li> <%= @spot.area %> </li>
-            <li> <%= @spot.style %> </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-5 col-sm-offset-1">
-        <div class="margin-form">
-          <p id="tt_price" class="card-margin  "> <strong>Your booking is of <%= @params["total_price"] %> € </strong> </p>
           <p class="card-margin  "> The date you have chosen : </p>
           <%= simple_form_for([ @spot, @booking ]) do |f| %>
             <%= f.input :start_time, as: :string, input_html: {class: "datepicker", value: @params["start_time"]}%>
@@ -55,49 +36,48 @@
   </div>
 </div>
 
-      <% content_for(:after_js) do %>
+<% content_for(:after_js) do %>
 
-      <script type="text/javascript">
-        $(document).ready(function(){
-        $('.datepicker').datepicker({
-              startDate: 'd'
-          });
-        });
-      </script>
-      <% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('.datepicker').datepicker({
+        startDate: 'd'
+    });
+  $('.datepicker').on('changeDate', function(ev){
+      $(this).datepicker('hide');
+  });
+  });
+</script>
+<% end %>
 
-      <% content_for(:after_js) do %>
 
-        <% javascript_tag do %>
-          $('.simple_form').on('change', function() {
+<% content_for(:after_js) do %>
+  <% javascript_tag do %>
 
-         <!--  getting all the variables from the form -->
-            var start_date = new Date( $('#start_time').val());
-            var end_date = new Date($('#end_time').val());
+    $('.simple_form').on('change', function() {
 
-        <!--  calculating the total price for the booking-->
-          var total_price = Math.round(
-          <%= @spot.price %> * (((end_date-start_date) / (1000*60*60*24))+1));
+   <!--  getting all the variables from the form -->
+      var start_date = new Date( $('#booking_start_time').val());
+      var end_date = new Date($('#booking_end_time').val());
+      var laps = (end_date - start_date) / (1000 * 60 * 60 * 24) + 1
 
-        <!--  Setting the total price for the booking-->
-          $("#total_price").val(total_price);
+  <!--  calculating the total price for the booking-->
+      var total_price = Math.round(
+        <%= @spot.price %> * laps) ;
 
-        <!--  Displaying to the view the total price for the booking-->
-          $("#tt_price").text('your price would be of ' + total_price + ' €');
-          })
-        <% end %>
-      <% end %>
+  <!--  Setting the total price for the booking-->
+      $("#total_price").val(booking_total_price);
+      $("#tt_price").val('Total price : ' + total_price + ' €');
 
-      <% content_for(:after_js) do %>
-
-        <% javascript_tag do %>
-          $('.btn').on('click', function() {
-
-        <!--  Displaying the modal-->
-
-          })
-        <% end %>
-      <% end %>
+      $("#tt_price").text(total_price + ' €');
+      if (laps > 1) {
+        $("#tt_days").text(laps + ' days');
+      } else {
+        $("#tt_days").text('1 day');
+      }
+    })
+  <% end %>
+<% end %>
 
 
 <!-- Modal -->
@@ -109,7 +89,7 @@
         <h2 class="modal-title" id="myModalLabel">Thank you</h2>
       </div>
       <div class="modal-body">
-        Thank you very much, your booking has been taken into account.
+        Thank you very much, your booking has been taken into account. The spot owner will get back to you soon.
       </div>
     </div>
   </div>

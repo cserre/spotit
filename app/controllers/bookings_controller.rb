@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
     # @booking.total_price = @spot.price *(@booking.start_time-@booking.end_time)
     if @booking.save
       BookingMailer.booking_confirmation(@spot,@booking).deliver_now
-      redirect_to spot_path(@spot)
+      redirect_to user_path(current_user)
     else
       render :new
     end
