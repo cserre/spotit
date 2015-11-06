@@ -12,13 +12,13 @@ class Spot < ActiveRecord::Base
   validates :area, presence: true
   validates :style, presence: true
   validates :address, presence: true
-  validates :exposition, presence: true
+  validates :exposition, presence: true, length: { maximum: 2, too_long: "Choose N, S, E, O, EO, etc." }
   validate :has_photo
 
   paginates_per 20
 
   geocoded_by :address
-  after_validation :geocode, if: :street_changed? || :post_code_changed? || :city_changed?
+  after_validation :geocode, if: :address_changed?
 
   def rating
     spot_reviews.average(:rating) || 0
