@@ -49,10 +49,10 @@
         <div class="card">
           <span class="card-bg" style="background-image: url(<%= image_path spot.photos.first.picture.url(:medium) %>)"></span>
           <span class="card-gradient"></span>
-          <!-- <span class="card-rating">
+          <span class="card-rating">
 
-            <%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * 4).html_safe %>
-          </span> -->
+            <%= ("<i class='fa fa-star' style='color: #469AE0;'></i>" * spot.rating).html_safe %><%= ("<i class='fa fa-star' style='color: white;'></i>" * (5 - spot.rating)).html_safe %>
+          </span>
           <span class="card-price">
             <%= spot.price.to_i.to_s + ' €/day' %>
           </span>

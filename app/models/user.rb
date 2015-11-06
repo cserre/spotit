@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
 
   def imageUrl
     if self.picture.nil?
-      # ActionController::Base.helpers.asset_path('default_image.png')
-      "http://placehold.it/30x30"
+      ActionController::Base.helpers.asset_path('default_picture.png')
+      #{ }"http://placehold.it/30x30"
       #{ }"/assets/default_photo.jpg"
     else
       self.picture

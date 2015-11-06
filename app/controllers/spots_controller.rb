@@ -93,7 +93,6 @@ class SpotsController < ApplicationController
     end
   end
 
-
   private
   def set_spot
     id = params[:spot_id] || params[:id]

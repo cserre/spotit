@@ -24,4 +24,19 @@ class Spot < ActiveRecord::Base
   def address
     [street, post_code, city].compact.join(', ')
   end
+
+  def rating
+    nb_ratings = 0
+    total = 0
+    self.spot_reviews.each do |review|
+      nb_ratings +=1
+      total += review.rating
+    end
+    if nb_ratings > 0
+      return (total / nb_ratings).round.to_i
+    else
+      return 0
+    end
+
+  end
 end
