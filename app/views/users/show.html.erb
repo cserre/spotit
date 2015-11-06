@@ -9,14 +9,16 @@
   <div class="row">
     <div class="col-md-offset-1 col-md-2">
       <div class="mg-picture">
-        <%= image_tag current_user.picture %>
+        <%= image_tag @user.picture %>
       </div>
     </div>
     <div class="col-md-6 ">
       <div class="mg-welcome-profile">
         <h1>Bonjour, je m'appelle <%= @user.first_name %></h1>
         <p>Membre depuis <%= @user.created_at.strftime('%B %Y') %></p>
+        <% if @user == current_user %>
         <%=link_to "Modifier le Profil", edit_user_registration_path(@user) %>
+        <% end %>
         <h2 class="mg-spots">My spots:</h2>
           <div class="row">
             <div class="col-xs-12" style="padding-top: 30px;">
@@ -61,7 +63,7 @@
                             <%= booking.total_price.to_i.to_s + ' €/day' %>
                           </span>
                           <span class="card-text">
-                            <h3><%= 'from' + booking.start_time + 'to' + booking.end_time %></h3>
+                            <h3><%= 'from' + booking.start_time.strftime('%A, %b %d') + 'to' + booking.end_time.strftime('%A, %b %d') %></h3>
                           </span>
                           <%= link_to "", spot_path(spot),class: 'card-link' %>
                         </div>
