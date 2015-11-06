@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
 
   def show
-
   end
 
   def edit
@@ -13,12 +12,10 @@ class UsersController < ApplicationController
   def update
   end
 
-
 private
   def set_user
     id = params[:user_id] || params[:id]
     @user = User.find(id)
   end
-
 
 end
