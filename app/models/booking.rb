@@ -3,6 +3,7 @@ class Booking < ActiveRecord::Base
   belongs_to :spot
   belongs_to :user
 
+
   def owner
     spot.user
   end
@@ -10,5 +11,8 @@ class Booking < ActiveRecord::Base
   validates :total_price, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+
+  private
+
 
 end
