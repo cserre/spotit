@@ -24,9 +24,10 @@
           <h2><%= @spot.title %></h2>
 
           <!-- displaying the address -->
-          <address>
+          <address style="margin-bottom: 10px;">
             <strong><%= @spot.city %></strong>, <%= @spot.address %>, <%= @spot.post_code %><br>
           </address>
+          <p><%= ("<i class='fa fa-star' style='color: #FFCE54;'></i>" * @spot.rating).html_safe %><%= ("<i class='fa fa-star' style='color: #eee;'></i>" * (5 - @spot.rating)).html_safe %></p>
         </div>
       </div>
 
@@ -65,6 +66,9 @@
       <!-- commentaires -->
       <div class="row">
         <h3>All reviews</h3>
+        <% if @spot.spot_reviews.nil? %>
+          <p>No reviews yet.</p>
+        <% end %>
         <% @spot.spot_reviews.each do |spot_review| %>
           <div class="col-xs-12">
             <div class="review">

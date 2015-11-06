@@ -36,8 +36,16 @@ class SpotsController < ApplicationController
       @spots_selected = @spots_selected.where("area >= ?", @params["area"].to_i)
     end
 
+    if !(@params["rating"].nil? || @params["rating"] == "")
+      @spots_selected = @spots_selected.where(spot.rating > @params["rating"].to_i)
+    end
+
     # if !(@params["rating"].nil? || @params["rating"] == "")
-    #   @spots_selected = @spots_selected.where(spot.rating > @params["rating"].to_i)
+    #   spot_tem = []
+    #   @spots_selected.each do |spot|
+    #     spot_tem << spot if spot.rating >= @params["rating"].to_i
+    #   end
+    #   @spots_selected = spot_tem
     # end
 
     if !(@params["exceptional_view"].nil? || @params["exceptional_view"] == "") \
