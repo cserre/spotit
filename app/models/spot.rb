@@ -9,37 +9,19 @@ class Spot < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 36, too_long: "limit to 36 characters" }
   validates :description, presence: true
   validates :price, presence: true
-  validates :city, presence: true
   validates :area, presence: true
-  validates :street, presence: true
   validates :style, presence: true
-  validates :post_code, presence: true, format: { with: /\A\d{5}\z/, message: "this is not a post code" }
-  validates :exposition, presence: true
+  validates :address, presence: true
+  validates :exposition, presence: true, length: { maximum: 2, too_long: "Choose N, S, E, O, EO, etc." }
   validate :has_photo
-  # validates :photos, presence: true
-  # validates_associated :photos
 
   paginates_per 20
 
   geocoded_by :address
-  after_validation :geocode, if: :street_changed? || :post_code_changed? || :city_changed?
-
-  def address
-    [street, post_code, city].compact.join(', ')
-  end
+  after_validation :geocode, if: :address_changed?
 
   def rating
-    nb_ratings = 0
-    total = 0
-    self.spot_reviews.each do |review|
-      nb_ratings +=1
-      total += review.rating
-    end
-    if nb_ratings > 0
-      return (total / nb_ratings).round.to_i
-    else
-      return 0
-    end
+    spot_reviews.average(:rating) || 0
   end
 
   def has_photo
