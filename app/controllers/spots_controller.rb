@@ -9,7 +9,7 @@ class SpotsController < ApplicationController
   def index
     @spots = Spot.all
 
-    @spots_selected = Spot.all.where(visible: true)
+    @spots_selected = Spot.where(visible: true)
 
     if !(@params["city"].nil? || @params["city"] == "")
       # @spots_selected = @spots_selected.where("city = ?", @params["city"].capitalize)
@@ -36,18 +36,20 @@ class SpotsController < ApplicationController
       @spots_selected = @spots_selected.where("area >= ?", @params["area"].to_i)
     end
 
-    # if !(@params["rating"].nil? || @params["rating"] == "")
-    #   @spots_selected = @spots_selected.where(spot.rating > @params["rating"].to_i)
-    # end
-
     if !(@params["exceptional_view"].nil? || @params["exceptional_view"] == "") \
       && @params["exceptional_view"] == "on"
       @spots_selected = @spots_selected.where("exceptional_view = ?", true)
     end
+
     if !(@params["exposition"].nil? || @params["exposition"] == "") \
       && @params["exposition"] == "on"
       @spots_selected = @spots_selected.where("exposition = ?", true)
     end
+
+    if @params["rating"].present?
+      @spots_selected = @spots_selected.joins(:spot_reviews).group('spots.id').having('AVG(spot_reviews.rating) >= ?', @params["rating"])
+    end
+
     @spots_total_number = @spots_selected.length
     @spots_selected = @spots_selected.page params[:page]
 
@@ -112,8 +114,8 @@ class SpotsController < ApplicationController
     @params = params
   end
   def spot_params
-    params.require(:spot).permit(:title, :street, :description, :price, :user_id,
-      :visible, :city, :style, :post_code, :area, :exposition, :exceptional_view,
+    params.require(:spot).permit(:title, :address, :description, :price, :user_id,
+      :visible, :style, :area, :exposition, :exceptional_view,
       :modular_furniture, photos_attributes: [:id, :picture, :_destroy])
   end
 end

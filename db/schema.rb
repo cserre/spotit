@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105212232) do
+ActiveRecord::Schema.define(version: 20151106144818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,22 +55,20 @@ ActiveRecord::Schema.define(version: 20151105212232) do
 
   create_table "spots", force: :cascade do |t|
     t.string   "title"
-    t.string   "street"
     t.text     "description"
     t.float    "price"
     t.integer  "user_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.boolean  "visible",           default: false
-    t.string   "city"
     t.string   "style"
-    t.integer  "post_code"
     t.integer  "area"
     t.string   "exposition"
     t.boolean  "exceptional_view"
     t.boolean  "modular_furniture"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "address"
   end
 
   add_index "spots", ["user_id"], name: "index_spots_on_user_id", using: :btree

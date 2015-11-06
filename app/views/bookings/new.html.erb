@@ -37,7 +37,7 @@
       <div class="col-sm-5 col-sm-offset-1">
         <div class="margin-form">
           <p id="tt_price" class="card-margin  "> <strong>Your booking is of <%= @params["total_price"] %> € </strong> </p>
-          <p id="tt_price" class="card-margin  "> The date you have chosen : </p>
+          <p class="card-margin  "> The date you have chosen : </p>
           <%= simple_form_for([ @spot, @booking ]) do |f| %>
             <%= f.input :start_time, as: :string, input_html: {class: "datepicker", value: @params["start_time"]}%>
             <%= f.input :end_time, as: :string, input_html: {class: "datepicker", value: @params["end_time"] } %>

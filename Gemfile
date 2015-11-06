@@ -40,6 +40,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'
+  gem 'rack-mini-profiler'
 end
 
 group :production do
@@ -58,4 +59,6 @@ gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 
 gem "nested_form"
+
+gem "letter_opener", group: :development
 

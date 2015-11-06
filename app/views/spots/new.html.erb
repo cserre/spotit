@@ -23,6 +23,12 @@
       $('#pics>p>a').show();
     })
 
+    $('#spot_address').keyup(function(){
+      var address = $('#spot_address').val()
+    })
+    $('.new-spot').on('submit', function(){
+      $('#spot_address').val() = address
+    })
 
   <% end %>
 <% end %>
