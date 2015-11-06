@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
               <%= label_tag :rating, "Min rating:" %>
-              <%= text_field_tag :rating, nil, class: 'slider-rating span2', data: { :"slider-id" => 'slider-rating', :"slider-min" => 0, :"slider-max" => @max_rating, :"slider-step" => 1, :"slider-value" => @max_rating } %>
+              <%= text_field_tag :rating, nil, class: 'slider-rating span2', data: { :"slider-id" => 'slider-rating', :"slider-min" => 0, :"slider-max" => @max_rating, :"slider-step" => 1, :"slider-value" => 0 } %>
             </div>
             <div class="form-group form-inline">
               <!-- <%= label_tag :city, "City:" %> -->
@@ -92,7 +92,7 @@
       sliderArea.slider('setValue', valueArea);
     <% end %>
     <% if @params["rating"].to_i > 0 %>
-      var valueArea = <%= @params["rating"].to_i %>;
+      var valueRating = <%= @params["rating"].to_i %>;
       sliderRating.slider('setValue', valueRating);
     <% end %>
   <% end %>

@@ -36,28 +36,28 @@ class SpotsController < ApplicationController
       @spots_selected = @spots_selected.where("area >= ?", @params["area"].to_i)
     end
 
-    if !(@params["rating"].nil? || @params["rating"] == "")
-      @spots_selected = @spots_selected.where(spot.rating > @params["rating"].to_i)
-    end
-
-    # if !(@params["rating"].nil? || @params["rating"] == "")
-    #   spot_tem = []
-    #   @spots_selected.each do |spot|
-    #     spot_tem << spot if spot.rating >= @params["rating"].to_i
-    #   end
-    #   @spots_selected = spot_tem
-    # end
-
     if !(@params["exceptional_view"].nil? || @params["exceptional_view"] == "") \
       && @params["exceptional_view"] == "on"
       @spots_selected = @spots_selected.where("exceptional_view = ?", true)
     end
+
     if !(@params["exposition"].nil? || @params["exposition"] == "") \
       && @params["exposition"] == "on"
       @spots_selected = @spots_selected.where("exposition = ?", true)
     end
+
+    if !(@params["rating"].nil? || @params["rating"] == "")
+      spot_tem = []
+      @spots_selected.each do |spot|
+        spot_tem << spot if (spot.rating >= @params["rating"].to_i || (spot.rating == 0 && spot.spot_reviews.size == 0))
+      end
+      @spots_selected = spot_tem
+    end
+
     @spots_total_number = @spots_selected.length
-    @spots_selected = @spots_selected.page params[:page]
+    # @spots_selected = @spots_selected.page params[:page]
+    @spots_selected = Kaminari.paginate_array(@spots_selected).page(params[:page])
+
 
     @markers = Gmaps4rails.build_markers(@spots_selected) do |spot, marker|
       @my_spot = spot
