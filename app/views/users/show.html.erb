@@ -9,12 +9,12 @@
   <div class="row">
     <div class="col-md-offset-1 col-md-2">
       <div class="mg-picture">
-        <%= image_tag @user.picture %>
+        <%= image_tag @user.imageUrl %>
       </div>
     </div>
     <div class="col-md-6 ">
       <div class="mg-welcome-profile">
-        <h1>Bonjour, je m'appelle <%= @user.first_name %></h1>
+        <h1>Bonjour <%= @user.first_name %></h1>
         <p>Membre depuis <%= @user.created_at.strftime('%B %Y') %></p>
         <% if @user == current_user %>
         <%=link_to "Modifier le Profil", edit_user_registration_path(@user) %>
@@ -51,10 +51,10 @@
                 <% else %>
                 <% @user.spots.each do |spot| %>
                   <h3><%= spot.title %></h3>
-                  <% if Booking.find_by_spot_id(spot.id).nil? %>
+                  <% if spot.bookings.nil? %>
                     <p><%= "You have no booking for this spot yet" %></p>
                     <% else %>
-                    <% Booking.find_by_spot_id(spot.id).each do |booking|%>
+                    <% spot.bookings.each do |booking|%>
                       <div class="col-md-6">
                         <div class="card">
                           <span class="card-bg" style="background-image: url(<%= image_path 'loft1.png' %>)"></span>
