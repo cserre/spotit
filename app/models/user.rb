@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :spots
   has_many :spot_reviews, through: :spots
   devise :omniauthable, omniauth_providers: [:facebook]
+  after_create :send_welcome_email
 
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -48,5 +49,11 @@ class User < ActiveRecord::Base
     else
       self.picture
     end
+  end
+
+   private
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now
   end
 end
