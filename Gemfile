@@ -59,3 +59,5 @@ gem 'paperclip'
 
 gem "nested_form"
 
+gem "letter_opener", group: :development
+
