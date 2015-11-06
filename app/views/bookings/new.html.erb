@@ -18,7 +18,7 @@
             <p id="tt_days">1 day<p>
             <h3 id="tt_price"><%= @spot.price.to_i %> €</h3>
           </div>
-          <p class="card-margin  "> The date you have chosen : </p>
+          <p class="card-margin  "> The dates you have chosen: </p>
           <%= simple_form_for([ @spot, @booking ]) do |f| %>
             <%= f.input :start_time, as: :string, input_html: {class: "datepicker", value: @params["start_time"]}%>
             <%= f.input :end_time, as: :string, input_html: {class: "datepicker", value: @params["end_time"] } %>

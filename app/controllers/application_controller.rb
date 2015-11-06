@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
   def after_sign_out_path_for(resource_or_scope)
-    root_path
+    #root_path
+    request.referer
   end
 end

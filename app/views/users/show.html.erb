@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-md-offset-1 col-md-2">
       <div class="mg-picture">
-        <%= image_tag @user.imageUrl %>
+        <%= image_tag(@user.imageUrl, :style => 'height: 200px') %>
       </div>
     </div>
     <div class="col-md-7 ">
@@ -35,7 +35,7 @@
                 <% @user.spots.each do |spot| %>
                   <div class="col-md-6">
                     <div class="card">
-                      <span class="card-bg" style="background-image: url(<%= image_path 'loft1.png' %>)"></span>
+                      <span class="card-bg" style="background-image: url(<%= image_path spot.photos.first.picture.url(:medium) %>)"></span>
                       <span class="card-gradient"></span>
                       <span class="card-price">
                         <%= spot.price.to_i.to_s + ' €/day' %>
